@@ -3,8 +3,9 @@ import {createTheme} from '@mui/system';
 export const Theme = createTheme({
     palette:{
         primary:{
-            main:"#323238ff" ,
+            main:"#38383aff" ,
             light:"#18926E",
+            negative:"#E52E4D",
             dark:"#015F43",
             contrastText:"#F5F5F5"
         },
@@ -14,9 +15,18 @@ export const Theme = createTheme({
             contrastText:"#b6b4b4ff"
         },
         background:{
-            body:"linear-gradient( to bottom, #141416 15% , #202024 15% 100%)",
-            
+            body:"#202024",
+            header:"#141416"
+        }
+    },
+    typography:{
+        boxSpace:{
+            size:"30px",
+        },
+        card:{
+            size:"14px",
+            sizePrice:"24px",
+            sizeLine:"160%"
         }
     }
-    
 });
