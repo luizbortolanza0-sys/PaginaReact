@@ -1,11 +1,13 @@
 import { Stack, Box, Button, Card } from "@mui/material";
+import { TextBox } from "../Components/TextBox.jsx";
 import { Theme } from "../themes/theme.js";
+import { NovaTransacao } from "../Components/NovaTransação.jsx";
 import {
   AttachMoney,
   ArrowCircleUp,
   ArrowCircleDown,
 } from "@mui/icons-material";
-import logo from "../img/logo.png"
+import logo from "../img/logo.png";
 
 function Home() {
   function NomeEmpresa() {
@@ -27,11 +29,11 @@ function Home() {
           color: Theme.palette.primary.contrastText,
         }}
       >
-        <Box sx={{paddingTop:"30PX"}}>
+        <Box sx={{ paddingTop: "30PX" }}>
           <h2
             style={{
               fontSize: Theme.typography.card.size,
-              fontWeight:"normal",
+              fontWeight: "normal",
               color: Theme.palette.secundary.contrastText,
             }}
           >
@@ -40,7 +42,7 @@ function Home() {
           <p
             style={{
               fontSize: Theme.typography.card.sizePrice,
-              fontWeight:"bold"
+              fontWeight: "bold",
             }}
           >
             R$ {info}
@@ -50,7 +52,7 @@ function Home() {
           sx={{
             color: color,
             paddingTop: "20px",
-            fontSize:"30px"
+            fontSize: "30px",
           }}
         />
       </Card>
@@ -65,7 +67,7 @@ function Home() {
           width: "100%",
           height: "180px",
           justifyContent: "space-between",
-          overflow:"auto"
+          overflow: "auto",
         }}
       >
         <CardSaldos
@@ -90,10 +92,16 @@ function Home() {
     );
   }
   function Logo() {
-    return <img src={logo} alt="logo" style={{
-      height:"30px",
-      width:"30xp"
-    }}/>;
+    return (
+      <img
+        src={logo}
+        alt="logo"
+        style={{
+          height: "30px",
+          width: "30xp",
+        }}
+      />
+    );
   }
 
   return (
@@ -102,9 +110,10 @@ function Home() {
       className="containerPrincipal"
       sx={{
         height: "200vh",
-        width: "100%",        
+        width: "100%",
         backgroundColor: Theme.palette.background.body,
         flexDirection: "column",
+        alignItems: "center",
       }}
     >
       <Stack
@@ -114,18 +123,18 @@ function Home() {
           backgroundColor: Theme.palette.background.header,
           alignItems: "center",
           flexDirection: "column",
-          overflow:"visible",
+          overflow: "visible",
         }}
       >
         <Stack
           sx={{
             display: "flex",
             alignItems: "center",
-            position:"relative",
+            position: "relative",
             justifyContent: "flex-start",
             flexDirection: "column",
             width: "80%",
-            top:"4rem",
+            top: "4rem",
           }}
         >
           <Box
@@ -143,62 +152,51 @@ function Home() {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
-                alignItems:"center",
+                alignItems: "center",
                 color: Theme.palette.primary.contrastText,
               }}
             >
               <Logo />
               <NomeEmpresa />
             </Box>
-            <Button
-              variant="contained"
-              size="large"
-              sx={{
-                backgroundColor: Theme.palette.secundary.main,
-                color: Theme.palette.primary.contrastText,
-                fontSize: "14px",
-                textTransform: "none",
-                "&:hover":{
-                  backgroundColor: Theme.palette.primary.light
-                }
-              }}
-            >
-              Nova transação
-            </Button>
+            <NovaTransacao />
           </Box>
           <InformacoesSaldo />
         </Stack>
       </Stack>
 
-
-
-
-      <Box sx={{ p: 2, width: 300, position:"relative", top:"100px"}}>
-      <Card
+      <Stack
         sx={{
-          p: 2,
-          bgcolor: "#f5f5f5",
-          borderRadius: 3,
-          boxShadow: 3,
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
+          width: "80%",
+          position: "relative",
+          top: "100px",
         }}
       >
-        <Box sx={{ fontSize: 20, fontWeight: 600 }}>Finanças</Box>
-
-        <Box sx={{ fontSize: 26, fontWeight: 700 }}>R$ 1.250,75</Box>
-
-        <Box sx={{ fontSize: 14 }}>
-          <strong>Receita:</strong> R$ 2.300,00
+        <Box
+          sx={{
+            display:"flex",
+            alignItems:"center",
+            width: "100%",
+            gap:"20px"
+          }}
+        >
+          <TextBox label={"Busque uma Transação"} />
+          <Button
+            variant="contained"
+            size="medium"
+            
+            sx={{
+              backgroundColor: Theme.palette.secundary.main,
+              color: Theme.palette.primary.contrastText,
+              fontSize: "15px",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: Theme.palette.primary.light,
+              },
+            }}
+          >Buscar</Button>
         </Box>
-
-        <Box sx={{ fontSize: 14 }}>
-          <strong>Despesa:</strong> R$ 1.049,25
-        </Box>
-      </Card>
-    </Box>
-      
+      </Stack>
     </Stack>
   );
 }
