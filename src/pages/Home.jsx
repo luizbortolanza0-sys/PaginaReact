@@ -29,7 +29,7 @@ function Home() {
           color: Theme.palette.primary.contrastText,
         }}
       >
-        <Box sx={{ paddingTop: "30PX" }}>
+        <Box sx={{ paddingTop: "25px",display:"flex", gap:"18px", flexDirection:"column"}}>
           <h2
             style={{
               fontSize: Theme.typography.card.size,
@@ -184,11 +184,12 @@ function Home() {
           <Button
             variant="contained"
             size="medium"
-            
+            disableElevation={true}
             sx={{
               backgroundColor: Theme.palette.secundary.main,
               color: Theme.palette.primary.contrastText,
-              fontSize: "15px",
+              fontSize: "14px",
+              padding:"7px 25px 7px 25px",
               textTransform: "none",
               "&:hover": {
                 backgroundColor: Theme.palette.primary.light,

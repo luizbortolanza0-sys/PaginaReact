@@ -78,13 +78,41 @@ export const NovaTransacao = () => {
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
+                  gap: "10px",
                 }}
               >
-                <Button>
-                  Entrada <ArrowCircleUp />
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "50%",
+                    backgroundColor: Theme.palette.secundary.dark,
+                    color: Theme.palette.primary.contrastText,
+                    fontSize: "14px",
+                    fontWeight:"normal",
+                    textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: Theme.palette.primary.main,
+                    },
+                  }}
+                >
+                  <ArrowCircleUp /> Entrada
                 </Button>
-                <Button>
-                  Saida <ArrowCircleDown />
+                <Button
+                  variant="contained"
+                  sx={{
+                    height:"40px",
+                    width: "50%",
+                    backgroundColor: Theme.palette.secundary.dark,
+                    color: Theme.palette.primary.contrastText,
+                    fontSize: "14px",
+                    fontWeight:"normal",
+                    textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: Theme.palette.primary.main,
+                    },
+                  }}
+                >
+                  <ArrowCircleDown /> Saida
                 </Button>
               </Box>
             </Box>
