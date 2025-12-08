@@ -3,8 +3,8 @@ import {Theme} from "../themes/theme.js"
 
 
 export const InfoCard = ({descricao, preco, categoria, data, tipo})=>{
-    if(!tipo){
-        preco == "-" + preco
+    if(!(tipo)){
+        preco = "-" + preco
     }
     return(
         <Card sx={{width:"100%",

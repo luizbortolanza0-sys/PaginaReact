@@ -13,7 +13,7 @@ export const InfoBox = () => {
             gap:"10px"
         }}>    
             <InfoCard descricao={"Compra de Moveis"} preco={"10.200,00"} categoria={"Casa"} data={"20/10/2025"} tipo={false} />
-             <InfoCard descricao={"Compra de Moveis"} preco={"10.200,00"} categoria={"Casa"} data={"20/10/2025"} tipo={false} />
+             <InfoCard descricao={"Compra de Moveis"} preco={"10.200,00"} categoria={"Casa"} data={"20/10/2025"} tipo={true} />
             <Pagination
             shape="rounded"
             count={3}
