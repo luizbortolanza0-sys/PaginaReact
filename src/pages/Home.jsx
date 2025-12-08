@@ -1,7 +1,8 @@
-import { Stack, Box, Button, Card } from "@mui/material";
+import { Stack, Box, Card } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { SearchBar } from "../Components/SearchBar.jsx";
 import { NovaTransacao } from "../Components/NovaTransação.jsx";
+import { InfoBox } from "../Components/InfoBox.jsx";
 import {
   AttachMoney,
   ArrowCircleUp,
@@ -29,7 +30,14 @@ function Home() {
           color: Theme.palette.primary.contrastText,
         }}
       >
-        <Box sx={{ paddingTop: "25px",display:"flex", gap:"18px", flexDirection:"column"}}>
+        <Box
+          sx={{
+            paddingTop: "25px",
+            display: "flex",
+            gap: "18px",
+            flexDirection: "column",
+          }}
+        >
           <h2
             style={{
               fontSize: Theme.typography.card.size,
@@ -163,6 +171,7 @@ function Home() {
           </Box>
           <InformacoesSaldo />
         </Stack>
+
       </Stack>
 
       <Stack
@@ -173,7 +182,9 @@ function Home() {
         }}
       >
         <SearchBar />
+        <InfoBox />
       </Stack>
+
     </Stack>
   );
 }

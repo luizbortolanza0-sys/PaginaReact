@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { ButtonType } from "./ButtonType.jsx";
 
-
 export const NovaTransacao = () => {
   const [open, setOpen] = useState(false);
   function clickOpen() {
@@ -50,7 +49,7 @@ export const NovaTransacao = () => {
             display: "flex",
             flexDirection: "column",
             width: "33rem",
-            height: "30rem",
+            height: "28rem",
             alignItems: "center",
             color: Theme.palette.primary.contrastText,
             backgroundColor: Theme.palette.background.body,
@@ -61,7 +60,7 @@ export const NovaTransacao = () => {
               display: "flex",
               flexDirection: "column",
               gap: "35px",
-              paddingTop: "80px",
+              paddingTop: "50px",
               width: "80%",
             }}
           >
@@ -86,7 +85,19 @@ export const NovaTransacao = () => {
                 <ButtonType />
               </Box>
             </Box>
-            <Button fullWidth="true">Cadastrar</Button>
+            <Button fullWidth="true" sx={{
+              backgroundColor: Theme.palette.secundary.main,
+              color: Theme.palette.primary.contrastText,
+              paddingTop:"10px",
+              paddingBottom:"10px",
+              fontSize: "14px",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: Theme.palette.primary.light,
+              },
+            }}>
+              Cadastrar
+            </Button>
           </Box>
           <Button
             onClick={clickClose}
@@ -94,10 +105,10 @@ export const NovaTransacao = () => {
               position: "absolute",
               alignSelf: "flex-end",
               color: Theme.palette.secundary.contrastText,
-              top:"25px"
+              top: "18px",
             }}
           >
-            <Close/>
+            <Close />
           </Button>
         </Card>
       </Dialog>
