@@ -1,6 +1,6 @@
 import { Stack, Box, Button, Card } from "@mui/material";
-import { TextBox } from "../Components/TextBox.jsx";
 import { Theme } from "../themes/theme.js";
+import { SearchBar } from "../Components/SearchBar.jsx";
 import { NovaTransacao } from "../Components/NovaTransação.jsx";
 import {
   AttachMoney,
@@ -172,31 +172,7 @@ function Home() {
           top: "100px",
         }}
       >
-        <Box
-          sx={{
-            display:"flex",
-            alignItems:"center",
-            width: "100%",
-            gap:"20px"
-          }}
-        >
-          <TextBox label={"Busque uma Transação"} />
-          <Button
-            variant="contained"
-            size="medium"
-            disableElevation={true}
-            sx={{
-              backgroundColor: Theme.palette.secundary.main,
-              color: Theme.palette.primary.contrastText,
-              fontSize: "14px",
-              padding:"7px 25px 7px 25px",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: Theme.palette.primary.light,
-              },
-            }}
-          >Buscar</Button>
-        </Box>
+        <SearchBar />
       </Stack>
     </Stack>
   );

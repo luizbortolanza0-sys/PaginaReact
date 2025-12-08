@@ -2,7 +2,9 @@ import { Button, Card, Dialog, Box } from "@mui/material";
 import { TextBox } from "./TextBox.jsx";
 import { Theme } from "../themes/theme.js";
 import { useState } from "react";
-import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
+import { ButtonType } from "./ButtonType.jsx";
+
 
 export const NovaTransacao = () => {
   const [open, setOpen] = useState(false);
@@ -81,39 +83,7 @@ export const NovaTransacao = () => {
                   gap: "10px",
                 }}
               >
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: "50%",
-                    backgroundColor: Theme.palette.secundary.dark,
-                    color: Theme.palette.primary.contrastText,
-                    fontSize: "14px",
-                    fontWeight:"normal",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: Theme.palette.primary.main,
-                    },
-                  }}
-                >
-                  <ArrowCircleUp /> Entrada
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{
-                    height:"40px",
-                    width: "50%",
-                    backgroundColor: Theme.palette.secundary.dark,
-                    color: Theme.palette.primary.contrastText,
-                    fontSize: "14px",
-                    fontWeight:"normal",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: Theme.palette.primary.main,
-                    },
-                  }}
-                >
-                  <ArrowCircleDown /> Saida
-                </Button>
+                <ButtonType />
               </Box>
             </Box>
             <Button fullWidth="true">Cadastrar</Button>
@@ -123,9 +93,11 @@ export const NovaTransacao = () => {
             sx={{
               position: "absolute",
               alignSelf: "flex-end",
+              color: Theme.palette.secundary.contrastText,
+              top:"25px"
             }}
           >
-            X
+            <Close/>
           </Button>
         </Card>
       </Dialog>
