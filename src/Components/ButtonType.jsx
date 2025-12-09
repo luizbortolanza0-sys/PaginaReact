@@ -3,7 +3,7 @@ import { Button, Box } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { useState } from "react";
 
-function Buttons({ type, cor, Icon }) {
+function Buttons({ type, cor, Icon, onClick}) {
   const [focus, setFocus] = useState(false);
   let auxCor;
 
@@ -16,6 +16,7 @@ function Buttons({ type, cor, Icon }) {
 
   return (
     <Button
+      onClick={onClick}
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
       variant="contained"
@@ -51,14 +52,18 @@ function Buttons({ type, cor, Icon }) {
 }
 
 export const ButtonType = () => {
+  const [entrada,setEntrada] = useState(true);
+
   return (
     <>
       <Buttons
+        onClick={() => setEntrada(true)}
         type={"Entrada"}
         cor={Theme.palette.secundary.main}
         Icon={ArrowCircleUp}
       />
       <Buttons
+        onClick={()=> setEntrada(false)}
         type={"Saida"}
         cor={Theme.palette.primary.negative}
         Icon={ArrowCircleDown}

@@ -3,13 +3,14 @@ import { Theme } from "../themes/theme.js";
 import {useState} from "react";
 
 
-export const TextBox = ({ label, name }) => {
+export const TextBox = ({ label, name, onChange , value}) => {
 
 
   return (
     <TextField
       name={name}
-      onChange={(e) => onChange(nome, e.target.value)}
+      value={value}
+      onChange={(e) => onChange(name, e.target.value)}
       label={label}
       variant="outlined"
       size="small"

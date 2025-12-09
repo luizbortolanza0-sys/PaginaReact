@@ -12,7 +12,7 @@ export const InfoCard = ({descricao, preco, categoria, data, tipo})=>{
             flexDirection:"row",
             justifyContent:"space-between",
             alignItems:"center",
-            height:"50px",
+            height:"55px",
             fontSize:"14px",
             backgroundColor:Theme.palette.primary.main,
             color:Theme.palette.secundary.contrastText

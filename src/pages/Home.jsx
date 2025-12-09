@@ -117,11 +117,14 @@ function Home() {
       direction={"column"}
       className="containerPrincipal"
       sx={{
-        height: "200vh",
+        height: "100%",
         width: "100%",
         backgroundColor: Theme.palette.background.body,
+        position:"relative",
         flexDirection: "column",
         alignItems: "center",
+                    paddingBottom:"150px"
+
       }}
     >
       <Stack
@@ -153,6 +156,7 @@ function Home() {
               alignItems: "center",
               width: "100%",
               paddingBottom: Theme.typography.boxSpace.size,
+              
             }}
           >
             <Box

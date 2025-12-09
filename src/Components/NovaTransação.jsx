@@ -5,13 +5,43 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { ButtonType } from "./ButtonType.jsx";
 
+export const dbTeste=[
+
+];
+
 export const NovaTransacao = () => {
   const [open, setOpen] = useState(false);
+  const [form , setForm] = useState({});
+
   function clickOpen() {
     setOpen(true);
   }
   function clickClose() {
     setOpen(false);
+  }
+  function pegarMudanca(name, valor){
+    setForm({
+      ...form,
+      [name]:valor
+    });
+  }
+
+  function cadastrar(){
+    if (
+      form.descricao === "" ||
+      form.preco === "" ||
+      form.categoria === ""
+    ) {
+      alert("Algum campo está vazio");
+      return
+    }
+    dbTeste.push(form);
+    console.log(dbTeste[0].descricao, dbTeste[0].preco, dbTeste[0].categoria);
+    setForm({
+      descricao: "",
+      preco: "",
+      categoria: ""
+  });
   }
 
   return (
@@ -72,9 +102,9 @@ export const NovaTransacao = () => {
                 gap: "20px",
               }}
             >
-              <TextBox label={"Descrição"} />
-              <TextBox label={"Preço"} />
-              <TextBox label={"Categoria"} />
+              <TextBox label={"Descrição"} value={form.descricao} name="descricao" onChange={pegarMudanca} />
+              <TextBox label={"Preço"} value={form.preco} name="preco" onChange={pegarMudanca}/>
+              <TextBox label={"Categoria"} value={form.categoria} name={"categoria"} onChange={pegarMudanca}/>
               <Box
                 sx={{
                   display: "flex",
@@ -85,7 +115,9 @@ export const NovaTransacao = () => {
                 <ButtonType />
               </Box>
             </Box>
-            <Button fullWidth="true" sx={{
+            <Button
+            onClick={cadastrar} 
+            fullWidth="true" sx={{
               backgroundColor: Theme.palette.secundary.main,
               color: Theme.palette.primary.contrastText,
               paddingTop:"10px",
