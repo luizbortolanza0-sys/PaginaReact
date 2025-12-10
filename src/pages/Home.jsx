@@ -1,23 +1,30 @@
 import { Stack, Box, Card } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { SearchBar } from "../Components/SearchBar.jsx";
-import { NovaTransacao } from "../Components/NovaTransação.jsx";
 import { InfoBox } from "../Components/InfoBox.jsx";
+import { UpperHeader } from "../Components/UpperHeader.jsx";
 import {
   AttachMoney,
   ArrowCircleUp,
   ArrowCircleDown,
 } from "@mui/icons-material";
-import logo from "../img/logo.png";
+import { useState } from "react";
+import { data } from "../info/data.js";
 
 function Home() {
-  function NomeEmpresa() {
-    return <h1 style={{ fontSize: "20px", fontStyle: "normal" }}>Finance</h1>;
+  const [lista,setLista] = useState(data);
+  
+  function addList(novaLista){
+    setLista((prev) => [...prev, novaLista]);
   }
+
+
+
+
   function CardSaldos({ info, name, Icon, color }) {
     let bgcolor = Theme.palette.primary.main;
     if (name == "Total") bgcolor = Theme.palette.primary.dark;
-
+  
     return (
       <Card
         sx={{
@@ -99,18 +106,6 @@ function Home() {
       </Box>
     );
   }
-  function Logo() {
-    return (
-      <img
-        src={logo}
-        alt="logo"
-        style={{
-          height: "30px",
-          width: "30xp",
-        }}
-      />
-    );
-  }
 
   return (
     <Stack
@@ -148,31 +143,7 @@ function Home() {
             top: "4rem",
           }}
         >
-          <Box
-            className="header"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-              paddingBottom: Theme.typography.boxSpace.size,
-              
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                color: Theme.palette.primary.contrastText,
-              }}
-            >
-              <Logo />
-              <NomeEmpresa />
-            </Box>
-            <NovaTransacao />
-          </Box>
+          <UpperHeader onNovaTransacao={addList} />
           <InformacoesSaldo />
         </Stack>
 
@@ -186,7 +157,7 @@ function Home() {
         }}
       >
         <SearchBar />
-        <InfoBox />
+        <InfoBox lista = {lista}/>
       </Stack>
 
     </Stack>

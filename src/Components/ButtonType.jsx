@@ -51,19 +51,18 @@ function Buttons({ type, cor, Icon, onClick}) {
   );
 }
 
-export const ButtonType = () => {
-  const [entrada,setEntrada] = useState(true);
+export const ButtonType = ({onChange}) => {
 
   return (
     <>
       <Buttons
-        onClick={() => setEntrada(true)}
+        onClick={() => onChange(true)}
         type={"Entrada"}
         cor={Theme.palette.secundary.main}
         Icon={ArrowCircleUp}
       />
       <Buttons
-        onClick={()=> setEntrada(false)}
+        onClick={()=> onChange(false)}
         type={"Saida"}
         cor={Theme.palette.primary.negative}
         Icon={ArrowCircleDown}

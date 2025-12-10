@@ -5,43 +5,68 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { ButtonType } from "./ButtonType.jsx";
 
-export const dbTeste=[
-
-];
-
-export const NovaTransacao = () => {
+export const NovaTransacao = ({onNovaTransacao}) => {
   const [open, setOpen] = useState(false);
-  const [form , setForm] = useState({});
-
+  const [type, setType] = useState(true);
+  const [form, setForm] = useState([]);
+  
   function clickOpen() {
     setOpen(true);
   }
   function clickClose() {
     setOpen(false);
   }
-  function pegarMudanca(name, valor){
+  function pegarMudanca(name, valor) {
     setForm({
       ...form,
-      [name]:valor
+      [name]: valor,
     });
   }
-
-  function cadastrar(){
-    if (
-      form.descricao === "" ||
-      form.preco === "" ||
-      form.categoria === ""
-    ) {
-      alert("Algum campo está vazio");
-      return
+  function formatDate() {
+    const time = new Date();
+    if (time.getMinutes() < 10) {
+      return (
+        time.getHours() +
+        ":" +
+        0 + time.getMinutes() +
+        "-" +
+        time.getDate() +
+        "/" +
+        (time.getMonth() + 1) +
+        "/" +
+        time.getFullYear()
+      );
     }
-    dbTeste.push(form);
-    console.log(dbTeste[0].descricao, dbTeste[0].preco, dbTeste[0].categoria);
+    return (
+      time.getHours() +
+      ":" +
+      time.getMinutes() +
+      "-" +
+      time.getDate() +
+      "/" +
+      (time.getMonth() + 1) +
+      "/" +
+      time.getFullYear()
+    );
+  }
+
+  function cadastrar() {
+    console.log(type);
+    if (form.name === "" || form.valor === "" || form.categoria === "") {
+      alert("Algum campo está vazio");
+      return;
+    }
+    const novaTransacao = {
+      ...form,
+      tipo: type ? "entrada" : "saida",
+      data: formatDate()
+    };
+    onNovaTransacao(novaTransacao);
     setForm({
-      descricao: "",
-      preco: "",
-      categoria: ""
-  });
+      nome: "",
+      valor: "",
+      categoria: "",
+    });
   }
 
   return (
@@ -102,9 +127,24 @@ export const NovaTransacao = () => {
                 gap: "20px",
               }}
             >
-              <TextBox label={"Descrição"} value={form.descricao} name="descricao" onChange={pegarMudanca} />
-              <TextBox label={"Preço"} value={form.preco} name="preco" onChange={pegarMudanca}/>
-              <TextBox label={"Categoria"} value={form.categoria} name={"categoria"} onChange={pegarMudanca}/>
+              <TextBox
+                label={"Descrição"}
+                value={form.nome}
+                name="nome"
+                onChange={pegarMudanca}
+              />
+              <TextBox
+                label={"Preço"}
+                value={form.valor}
+                name="valor"
+                onChange={pegarMudanca}
+              />
+              <TextBox
+                label={"Categoria"}
+                value={form.categoria}
+                name={"categoria"}
+                onChange={pegarMudanca}
+              />
               <Box
                 sx={{
                   display: "flex",
@@ -112,22 +152,24 @@ export const NovaTransacao = () => {
                   gap: "10px",
                 }}
               >
-                <ButtonType />
+                <ButtonType onChange={setType} />
               </Box>
             </Box>
             <Button
-            onClick={cadastrar} 
-            fullWidth="true" sx={{
-              backgroundColor: Theme.palette.secundary.main,
-              color: Theme.palette.primary.contrastText,
-              paddingTop:"10px",
-              paddingBottom:"10px",
-              fontSize: "14px",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: Theme.palette.primary.light,
-              },
-            }}>
+              onClick={cadastrar}
+              fullWidth="true"
+              sx={{
+                backgroundColor: Theme.palette.secundary.main,
+                color: Theme.palette.primary.contrastText,
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                fontSize: "14px",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: Theme.palette.primary.light,
+                },
+              }}
+            >
               Cadastrar
             </Button>
           </Box>

@@ -2,9 +2,10 @@ import { InfoCard } from "./InfoCard";
 import { Box, Pagination } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 
-export const InfoBox = () => {
+export const InfoBox = ({lista}) => {
   return (
     <Box
+
       sx={{
         paddingTop: "25px",
         display: "flex",
@@ -14,20 +15,13 @@ export const InfoBox = () => {
         gap: "10px",
       }}
     >
-      <InfoCard
-        descricao={"Compra de Moveis"}
-        preco={"10.200,00"}
-        categoria={"Casa"}
-        data={"20/10/2025"}
-        tipo={false}
-      />
-      <InfoCard
-        descricao={"Compra de Moveis"}
-        preco={"10.200,00"}
-        categoria={"Casa"}
-        data={"20/10/2025"}
-        tipo={true}
-      />
+      {lista.map((item)=>{
+        const aux = item.tipo === "entrada";
+
+        return(<InfoCard descricao={item.nome} preco={item.valor} categoria={item.categoria} data={item.data} tipo={aux} />);
+      })}
+
+
       <Pagination
         shape="rounded"
         count={3}
