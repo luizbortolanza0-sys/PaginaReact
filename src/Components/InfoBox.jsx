@@ -1,11 +1,10 @@
-import { InfoCard } from "./InfoCard";
 import { Box, Pagination } from "@mui/material";
 import { Theme } from "../themes/theme.js";
+import { ItemMap } from "./ItemMap.jsx";
 
 export const InfoBox = ({lista}) => {
   return (
     <Box
-
       sx={{
         paddingTop: "25px",
         display: "flex",
@@ -15,11 +14,7 @@ export const InfoBox = ({lista}) => {
         gap: "10px",
       }}
     >
-      {lista.map((item)=>{
-        const aux = item.tipo === "entrada";
-
-        return(<InfoCard descricao={item.nome} preco={item.valor} categoria={item.categoria} data={item.data} tipo={aux} />);
-      })}
+      <ItemMap lista={lista}></ItemMap>
 
 
       <Pagination

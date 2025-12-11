@@ -1,13 +1,13 @@
 import { TextField } from "@mui/material";
 import { Theme } from "../themes/theme.js";
-import {useState} from "react";
 
 
-export const TextBox = ({ label, name, onChange , value}) => {
+export const TextBox = ({ label, name, onChange , value, type}) => {
 
 
   return (
     <TextField
+      type={type }
       name={name}
       value={value}
       onChange={(e) => onChange(name, e.target.value)}
@@ -19,6 +19,8 @@ export const TextBox = ({ label, name, onChange , value}) => {
         height:"40.5px",
         backgroundColor: Theme.palette.background.header,
         borderRadius: "6px",
+        '& input[type=number]::-webkit-inner-spin-button': { display: 'none' },
+        '& input[type=number]::-webkit-outer-spin-button': { display: 'none' },
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
             borderColor: Theme.palette.background.header, 

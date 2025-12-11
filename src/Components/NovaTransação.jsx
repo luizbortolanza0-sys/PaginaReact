@@ -64,7 +64,7 @@ export const NovaTransacao = ({onNovaTransacao}) => {
     onNovaTransacao(novaTransacao);
     setForm({
       nome: "",
-      valor: "",
+      valor: 0,
       categoria: "",
     });
   }
@@ -128,18 +128,21 @@ export const NovaTransacao = ({onNovaTransacao}) => {
               }}
             >
               <TextBox
+                type={"text"}
                 label={"Descrição"}
                 value={form.nome}
                 name="nome"
                 onChange={pegarMudanca}
               />
               <TextBox
+                type={"number"}
                 label={"Preço"}
-                value={form.valor}
+                value={Number.parseFloat(form.valor)}
                 name="valor"
                 onChange={pegarMudanca}
               />
               <TextBox
+                type={"text"}
                 label={"Categoria"}
                 value={form.categoria}
                 name={"categoria"}
