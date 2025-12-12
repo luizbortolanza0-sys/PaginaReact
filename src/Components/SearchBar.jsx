@@ -3,7 +3,7 @@ import { Search } from "@mui/icons-material";
 import { TextBox } from "./TextBox";
 import { Theme } from "../themes/theme";
 
-export const SearchBar = () => {
+export const SearchBar = ({onChange, onClick}) => {
   return (
     <Box
       sx={{
@@ -13,8 +13,9 @@ export const SearchBar = () => {
         gap: "20px",
       }}
     >
-      <TextBox label={"Busque uma Transação"} />
+      <TextBox onChange={onChange} label ={"Busque uma Transação"} />
       <Button
+        onClick={onClick}
         variant="contained"
         size="medium"
         disableElevation={true}

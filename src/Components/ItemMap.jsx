@@ -1,6 +1,14 @@
+import { Theme } from "../themes/theme";
 import { InfoCard } from "./InfoCard";
 
 export function ItemMap({ lista }) {
+
+  if(lista == ""){
+    return(<p style={{
+      color:Theme.palette.primary.contrastText
+    }}>Sem transações!</p>);
+  }
+
   return lista.map((item) => {
     const aux = item.tipo === "entrada";
 

@@ -29,6 +29,8 @@ export const NovaTransacao = ({onNovaTransacao}) => {
         time.getHours() +
         ":" +
         0 + time.getMinutes() +
+        ":" + 
+        time.getSeconds() +
         "-" +
         time.getDate() +
         "/" +
@@ -41,6 +43,8 @@ export const NovaTransacao = ({onNovaTransacao}) => {
       time.getHours() +
       ":" +
       time.getMinutes() +
+      ":" + 
+      time.getSeconds() +
       "-" +
       time.getDate() +
       "/" +

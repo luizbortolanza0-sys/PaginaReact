@@ -9,10 +9,17 @@ import { data } from "../info/data.js";
 
 function Home() {
   const [lista, setLista] = useState(data);
+  const [search, setSearch] = useState(lista);
+  
 
   function addList(novaLista) {
-    setLista((prev) => [...prev, novaLista]);
+    setLista((prev) => [novaLista, ...prev]);
+    setSearch(lista);
   }
+  function searchGet(){
+
+  }
+
   return (
     <Stack
       direction={"column"}
@@ -60,7 +67,7 @@ function Home() {
           top: "100px",
         }}
       >
-        <SearchBar />
+        <SearchBar  />
         <InfoBox lista={lista} />
       </Stack>
     </Stack>

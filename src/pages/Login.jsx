@@ -1,8 +1,21 @@
-import { Box, Button, Card } from "@mui/material";
+import { Box, Button, Card, Checkbox } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { TextBox } from "../Components/TextBox";
+import { useEffect, useState } from "react";
 
 export default function Login() {
+  const [senha, setSenha] = useState("password");
+  function handleChange() {
+    let aux = senha;
+    if (aux == "password") {
+      setSenha("text");
+      return;
+    }
+    if (aux == "text") {
+      setSenha("password");
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -23,7 +36,7 @@ export default function Login() {
           width: "35%",
           justifyContent: "center",
           alignItems: "flex-start",
-          borderRadius:"15px"
+          borderRadius: "15px",
         }}
       >
         <Box
@@ -46,10 +59,35 @@ export default function Login() {
             }}
           >
             <TextBox label={"Nome de Usuario"} name={"login"} />
-            <TextBox label={"Senha"} name={"senha"} />
-            <a
-              href="/login"
+            <TextBox type={senha} label={"Senha"} name={"senha"} />
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                height: "20px",
+              }}
+            >
+              <Checkbox
+                onChange={handleChange}
+                size="small"
+                label="Teste"
+                sx={{
+                  color: Theme.palette.secundary.main,
+                  width: "10%",
+                }}
+              />{" "}
+              <p
+                style={{
+                  color: Theme.palette.primary.contrastText,
+                  fontSize: "12px",
+                }}
+              >
+                Exibir Senha
+              </p>
+              <a
+              href="/"
               style={{
+                paddingLeft:"150px",
                 textDecoration: "none",
                 color: Theme.palette.primary.contrastText,
                 fontSize: "12px",
@@ -57,47 +95,51 @@ export default function Login() {
             >
               Esqueceu a senha?
             </a>
+            </Box>
+            
           </Box>
-          <Box sx={{
-            display:"flex",
-            gap:"10px",
-            width:"100%"
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "10px",
+              width: "100%",
+            }}
+          >
             <Button
-            sx={{
-              backgroundColor: Theme.palette.secundary.main,
-              color: Theme.palette.primary.contrastText,
-              width:"50%",
-              paddingTop: "10px",
-              paddingBottom: "10px",
-              fontSize: "14px",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: Theme.palette.primary.light,
-              },
-            }}
-          >
-            Entrar
-          </Button>
-          <Button
-            href="/cadastro"
-            sx={{
-              backgroundColor: Theme.palette.secundary.light,
-              color: Theme.palette.primary.contrastText,
-              width:"50%",
-              paddingTop: "10px",
-              paddingBottom: "10px",
-              fontSize: "14px",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: Theme.palette.secundary.dark,
-              },
-            }}
-          >
-            Criar Conta
-          </Button>
+              href="/home"
+              sx={{
+                backgroundColor: Theme.palette.secundary.main,
+                color: Theme.palette.primary.contrastText,
+                width: "50%",
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                fontSize: "14px",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: Theme.palette.primary.light,
+                },
+              }}
+            >
+              Entrar
+            </Button>
+            <Button
+              href="/cadastro"
+              sx={{
+                backgroundColor: Theme.palette.secundary.light,
+                color: Theme.palette.primary.contrastText,
+                width: "50%",
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                fontSize: "14px",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: Theme.palette.secundary.dark,
+                },
+              }}
+            >
+              Criar Conta
+            </Button>
           </Box>
-          
         </Box>
       </Card>
     </Box>
