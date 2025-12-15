@@ -7,7 +7,7 @@ export const TextBox = ({ label, name, onChange , value, type}) => {
 
   return (
     <TextField
-      type={type }
+      type={type}
       name={name}
       value={value}
       onChange={(e) => onChange(name, e.target.value)}

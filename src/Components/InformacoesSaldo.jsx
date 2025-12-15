@@ -19,7 +19,7 @@ export const InformacoesSaldo = ({ lista }) => {
     let saidaTotal = 0;
 
     lista.forEach((item) => {
-      console.log("valor:", item.valor, "tipo:", typeof item.valor);
+  
       if (item.tipo == "entrada") {
         entradaTotal += parseFloat(String(item.valor).replace(",", "."));
       }

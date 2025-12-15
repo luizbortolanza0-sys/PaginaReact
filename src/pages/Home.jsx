@@ -10,14 +10,32 @@ import { data } from "../info/data.js";
 function Home() {
   const [lista, setLista] = useState(data);
   const [search, setSearch] = useState(lista);
-  
+  const [texto, setTexto] = useState("");
 
   function addList(novaLista) {
-    setLista((prev) => [novaLista, ...prev]);
-    setSearch(lista);
+    setLista((prev) => {
+      const nova = [novaLista, ...prev];
+      setSearch(nova);
+      return nova;
+    });
   }
-  function searchGet(){
 
+  function searchChange(name , value) {
+    console.log(value)
+    setTexto(value);
+  }
+
+  function searchGet() {
+    if (texto.trim() === "") {
+      setSearch(lista);
+      return;
+    }
+
+    setSearch(
+    lista.filter(item =>
+      item.nome.toLowerCase().includes(texto.toLowerCase())
+    )
+  );
   }
 
   return (
@@ -56,7 +74,7 @@ function Home() {
           }}
         >
           <UpperHeader onNovaTransacao={addList} />
-          <InformacoesSaldo lista={lista}/>
+          <InformacoesSaldo lista={lista}  />
         </Stack>
       </Stack>
 
@@ -67,8 +85,8 @@ function Home() {
           top: "100px",
         }}
       >
-        <SearchBar  />
-        <InfoBox lista={lista} />
+        <SearchBar onChange={searchChange} value={texto} onClick={()=>searchGet()}/>
+        <InfoBox lista={search} />
       </Stack>
     </Stack>
   );

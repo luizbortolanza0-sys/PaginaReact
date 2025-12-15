@@ -6,7 +6,7 @@ export function ItemMap({ lista }) {
   if(lista == ""){
     return(<p style={{
       color:Theme.palette.primary.contrastText
-    }}>Sem transações!</p>);
+    }}>Nenhuma transação encontrada!</p>);
   }
 
   return lista.map((item) => {
