@@ -69,7 +69,7 @@ export const NovaTransacao = ({onNovaTransacao}) => {
     setForm({
       nome: "",
       valor: 0,
-      categoria: "",
+      categoria: ""
     });
   }
 

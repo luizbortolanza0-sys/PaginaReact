@@ -1,10 +1,39 @@
 import { Box, Button, Card, Checkbox } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { TextBox } from "../Components/TextBox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { logins } from "../info/login.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [senha, setSenha] = useState("password");
+  const [login, setLogin] = useState([]);
+  const navigate = useNavigate();
+
+  function validarLogin(logins, login){
+    return logins.login == login.login && logins.senha == login.senha
+  }
+
+  function onClick(){
+    if(validarLogin(logins[0], login)){
+      navigate("/home");
+      return;
+    }
+    alert("Senha Incorreta!");
+    setLogin({
+      login:"",
+      senha:""
+    });
+
+  }
+
+  function onChange(name, value){
+      setLogin({
+        ...login,
+        [name] : value
+      });
+  }
+
   function handleChange() {
     let aux = senha;
     if (aux == "password") {
@@ -35,7 +64,7 @@ export default function Login() {
           height: "60%",
           width: "35%",
           justifyContent: "center",
-          alignItems: "flex-start",
+          alignItems: "center",
           borderRadius: "15px",
         }}
       >
@@ -43,10 +72,11 @@ export default function Login() {
           sx={{
             display: "flex",
             alignItems: "flex-start",
+            justifyContent: "center",
             flexDirection: "column",
             width: "80%",
             gap: "20px",
-            paddingTop: "60px",
+            paddingBottom:"10%",
           }}
         >
           <h1 style={{ color: Theme.palette.primary.contrastText }}>Login</h1>
@@ -58,8 +88,8 @@ export default function Login() {
               width: "100%",
             }}
           >
-            <TextBox label={"Nome de Usuario"} name={"login"} />
-            <TextBox type={senha} label={"Senha"} name={"senha"} />
+            <TextBox label={"Nome de Usuario"} name={"login"} value={login.login} onChange={onChange} />
+            <TextBox type={senha} label={"Senha"} name={"senha"} value={login.senha} onChange={onChange}/>
             <Box
               sx={{
                 display: "flex",
@@ -106,7 +136,7 @@ export default function Login() {
             }}
           >
             <Button
-              href="/home"
+              onClick={onClick}
               sx={{
                 backgroundColor: Theme.palette.secundary.main,
                 color: Theme.palette.primary.contrastText,

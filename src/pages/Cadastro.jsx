@@ -35,7 +35,7 @@ export default function Cadastro() {
           height: "60%",
           width: "35%",
           justifyContent: "center",
-          alignItems: "flex-start",
+          alignItems: "center",
           borderRadius: "15px",
         }}
       >
@@ -46,7 +46,6 @@ export default function Cadastro() {
             flexDirection: "column",
             width: "80%",
             gap: "20px",
-            paddingTop: "45px",
           }}
         >
           <h1 style={{ color: Theme.palette.primary.contrastText }}>
