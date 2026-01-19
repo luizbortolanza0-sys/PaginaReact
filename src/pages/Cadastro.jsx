@@ -2,9 +2,47 @@ import { Box, Button, Card, Checkbox } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { TextBox } from "../Components/TextBox";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { postCriarConta } from "../service/post/postCriarConta.js";
+
 
 export default function Cadastro() {
   const [senha, setSenha] = useState("password");
+  const [login,setLogin] = useState([]);
+  const [confirmacaoSenha, setConfirmacaoSenha] = useState([]);
+  const navigate = useNavigate(); 
+
+  async function handleClick() {
+    if(login.senha !== confirmacaoSenha.senhaConfirmada){
+      alert('as duas senhas nao estao iguais!');
+      return;
+    }
+    const response = await postCriarConta(login);
+    if(response.status == 200){
+      console.log(response.mensagem);
+      navigate('/');
+    }
+    if(response.status == 400){
+      alert(response.data.erro);
+    }
+    if(response.status == 500){
+      alert(response.data.erro);
+    }
+  }
+
+  function onChange(name, value){
+    setLogin({
+      ...login,
+      [name]:value,
+    });
+  }
+  function onChangeConfimacao(name, value){
+    setConfirmacaoSenha({
+      ...login,
+      [name]:value
+    });
+  }
+
   function handleChange() {
     let aux = senha;
     if (aux == "password") {
@@ -59,18 +97,33 @@ export default function Cadastro() {
               width: "100%",
             }}
           >
-            <TextBox label={"Nome de Usuario"} name={"login"} />
-            <TextBox type={senha} label={"Senha"} name={"senha"} />
+            <TextBox 
+            label={"Nome de Usuario"} 
+            name={"login"}
+            value={login.login}
+            onChange={onChange}
+            />
+            <TextBox 
+            type={senha} 
+            label={"Senha"} 
+            name={"senha"}
+            value={login.senha}
+            onChange={onChange}
+            />
             <TextBox
               type={senha}
               label={"Confirmar senha"}
               name={"senhaConfirmada"}
+              value={confirmacaoSenha.senhaConfirmada}
+              onChange={onChangeConfimacao}
             />
-            <Box sx={{
-              display:"flex",
-              alignItems:"center",
-              height:"20px"
-            }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                height: "20px",
+              }}
+            >
               <Checkbox
                 onChange={handleChange}
                 size="small"
@@ -78,12 +131,16 @@ export default function Cadastro() {
                 sx={{
                   color: Theme.palette.secundary.main,
                   width: "10%",
-
                 }}
-              /> <p style={{
-                color:Theme.palette.primary.contrastText,
-                fontSize:"12px"
-              }}>Exibir Senha</p>
+              />{" "}
+              <p
+                style={{
+                  color: Theme.palette.primary.contrastText,
+                  fontSize: "12px",
+                }}
+              >
+                Exibir Senha
+              </p>
             </Box>
           </Box>
           <Box
@@ -94,7 +151,7 @@ export default function Cadastro() {
             }}
           >
             <Button
-              href="/home"
+              onClick={handleClick}
               sx={{
                 backgroundColor: Theme.palette.secundary.main,
                 color: Theme.palette.primary.contrastText,

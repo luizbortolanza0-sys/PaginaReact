@@ -2,36 +2,40 @@ import { Box, Button, Card, Checkbox } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { TextBox } from "../Components/TextBox";
 import { useState } from "react";
-import { logins } from "../info/login.js";
 import { useNavigate } from "react-router-dom";
+import { postLogin } from "../service/post/postLogin.js";
 
 export default function Login() {
   const [senha, setSenha] = useState("password");
   const [login, setLogin] = useState([]);
   const navigate = useNavigate();
 
-  function validarLogin(logins, login){
-    return logins.login == login.login && logins.senha == login.senha
-  }
-
-  function onClick(){
-    if(validarLogin(logins[0], login)){
+  async function onClickEntrar() {
+    const response = await postLogin(login);
+    console.log(response)
+    if (response.status == 200) {
+      alert(response.data.mensagem);
       navigate("/home");
-      return;
     }
-    alert("Senha Incorreta!");
-    setLogin({
-      login:"",
-      senha:""
-    });
-
+    if (response.status == 400) {
+      alert(response.data.erro);
+    }
+    if (response.status == 401) {
+      alert(response.data.erro);
+    }
+    if (response.status == 500) {
+      alert(response.data.erro);
+    }
+  }
+  function onClickCadastrar() {
+    navigate("/cadastro");
   }
 
-  function onChange(name, value){
-      setLogin({
-        ...login,
-        [name] : value
-      });
+  function onChange(name, value) {
+    setLogin({
+      ...login,
+      [name]: value,
+    });
   }
 
   function handleChange() {
@@ -76,7 +80,7 @@ export default function Login() {
             flexDirection: "column",
             width: "80%",
             gap: "20px",
-            paddingBottom:"10%",
+            paddingBottom: "10%",
           }}
         >
           <h1 style={{ color: Theme.palette.primary.contrastText }}>Login</h1>
@@ -88,8 +92,19 @@ export default function Login() {
               width: "100%",
             }}
           >
-            <TextBox label={"Nome de Usuario"} name={"login"} value={login.login} onChange={onChange} />
-            <TextBox type={senha} label={"Senha"} name={"senha"} value={login.senha} onChange={onChange}/>
+            <TextBox
+              label={"Nome de Usuario"}
+              name={"login"}
+              value={login.login}
+              onChange={onChange}
+            />
+            <TextBox
+              type={senha}
+              label={"Senha"}
+              name={"senha"}
+              value={login.senha}
+              onChange={onChange}
+            />
             <Box
               sx={{
                 display: "flex",
@@ -115,18 +130,17 @@ export default function Login() {
                 Exibir Senha
               </p>
               <a
-              href="/"
-              style={{
-                paddingLeft:"150px",
-                textDecoration: "none",
-                color: Theme.palette.primary.contrastText,
-                fontSize: "12px",
-              }}
-            >
-              Esqueceu a senha?
-            </a>
+                href="/"
+                style={{
+                  paddingLeft: "150px",
+                  textDecoration: "none",
+                  color: Theme.palette.primary.contrastText,
+                  fontSize: "12px",
+                }}
+              >
+                Esqueceu a senha?
+              </a>
             </Box>
-            
           </Box>
           <Box
             sx={{
@@ -136,7 +150,7 @@ export default function Login() {
             }}
           >
             <Button
-              onClick={onClick}
+              onClick={onClickEntrar}
               sx={{
                 backgroundColor: Theme.palette.secundary.main,
                 color: Theme.palette.primary.contrastText,
@@ -153,7 +167,7 @@ export default function Login() {
               Entrar
             </Button>
             <Button
-              href="/cadastro"
+              onClick={onClickCadastrar}
               sx={{
                 backgroundColor: Theme.palette.secundary.light,
                 color: Theme.palette.primary.contrastText,
