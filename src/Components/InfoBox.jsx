@@ -2,7 +2,8 @@ import { Box, Pagination } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { ItemMap } from "./ItemMap.jsx";
 
-export const InfoBox = ({lista}) => {
+export const InfoBox = ({lista, page, onChange}) => {
+
   return (
     <Box
       sx={{
@@ -14,12 +15,14 @@ export const InfoBox = ({lista}) => {
         gap: "10px",
       }}
     >
-      <ItemMap lista={lista}></ItemMap>
+      <ItemMap lista={lista.transacoes}></ItemMap>
 
 
       <Pagination
         shape="rounded"
-        count={3}
+        page={page}
+        onChange={onChange}
+        count={lista.paginacao.totalPaginas}
         sx={{
           paddingTop: "20px",
           "& .MuiPaginationItem-root.Mui-selected": {

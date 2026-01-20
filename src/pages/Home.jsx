@@ -4,38 +4,57 @@ import { SearchBar } from "../Components/SearchBar.jsx";
 import { InfoBox } from "../Components/InfoBox.jsx";
 import { UpperHeader } from "../Components/UpperHeader.jsx";
 import { InformacoesSaldo } from "../Components/InformacoesSaldo.jsx";
-import { useState } from "react";
-import { data } from "../info/data.js";
+import { useEffect, useState } from "react";
+import { getTransacoes } from "../service/get/getTransacoes.js";
+
+const MaxPaginas = 50;
+const MaxPerPagina = 10;
+localStorage.setItem("novaTransacao", true);
+console.log(localStorage.getItem("novaTransacao"))
+
+const aux = await getTransacoes(1, MaxPaginas, localStorage.getItem("token"));
 
 function Home() {
-  const [lista, setLista] = useState(data);
-  const [search, setSearch] = useState(lista);
+  
+  const [page, setPage] = useState(1);
   const [texto, setTexto] = useState("");
+  
+  useEffect(() => {
+    async function fetchApi() {
+      let trans = await getTransacoes(page, MaxPerPagina, localStorage.getItem("token"));
+      setTransacoes(trans);
+      setSearch(trans);
+    }
+    fetchApi();
+    console.log(transacoes);
+    
+  },[page, localStorage.getItem("novaTransacao")]);
+  const [transacoes, setTransacoes] = useState(aux);
+  const [search, setSearch] = useState(transacoes);
+  const [lista, setLista] = useState(transacoes.transacoes);
 
-  function addList(novaLista) {
-    setLista((prev) => {
-      const nova = [novaLista, ...prev];
-      setSearch(nova);
-      return nova;
-    });
-  }
+  
 
-  function searchChange(name , value) {
-    console.log(value)
+  function searchChange(name, value) {
     setTexto(value);
+  }
+  const changePage = (event, value)=>{
+    setPage(value);
   }
 
   function searchGet() {
     if (texto.trim() === "") {
-      setSearch(lista);
+      setSearch(transacoes);
       return;
     }
 
-    setSearch(
-    lista.filter(item =>
-      item.nome.toLowerCase().includes(texto.toLowerCase())
-    )
-  );
+    setSearch({
+      ...search,
+      transacoes: lista.filter((item) =>
+        item.nome.toLowerCase().includes(texto.toLowerCase()),
+      ),
+    }
+    );
   }
 
   return (
@@ -73,8 +92,8 @@ function Home() {
             top: "4rem",
           }}
         >
-          <UpperHeader onNovaTransacao={addList} />
-          <InformacoesSaldo lista={lista}  />
+          <UpperHeader />
+          <InformacoesSaldo lista={lista} />
         </Stack>
       </Stack>
 
@@ -85,8 +104,12 @@ function Home() {
           top: "100px",
         }}
       >
-        <SearchBar onChange={searchChange} value={texto} onClick={()=>searchGet()}/>
-        <InfoBox lista={search} />
+        <SearchBar
+          onChange={searchChange}
+          value={texto}
+          onClick={() => searchGet()}
+        />
+        <InfoBox lista={search} page={page} onChange={changePage} />
       </Stack>
     </Stack>
   );

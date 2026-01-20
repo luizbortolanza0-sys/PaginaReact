@@ -4,8 +4,9 @@ import { Theme } from "../themes/theme.js";
 import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { ButtonType } from "./ButtonType.jsx";
+import { postCriarTransacao } from "../service/post/postCriarTransacao.js";
 
-export const NovaTransacao = ({onNovaTransacao}) => {
+export const NovaTransacao = () => {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState(true);
   const [form, setForm] = useState([]);
@@ -22,50 +23,24 @@ export const NovaTransacao = ({onNovaTransacao}) => {
       [name]: valor,
     });
   }
-  function formatDate() {
-    const time = new Date();
-    if (time.getMinutes() < 10) {
-      return (
-        time.getHours() +
-        ":" +
-        0 + time.getMinutes() +
-        ":" + 
-        time.getSeconds() +
-        "-" +
-        time.getDate() +
-        "/" +
-        (time.getMonth() + 1) +
-        "/" +
-        time.getFullYear()
-      );
-    }
-    return (
-      time.getHours() +
-      ":" +
-      time.getMinutes() +
-      ":" + 
-      time.getSeconds() +
-      "-" +
-      time.getDate() +
-      "/" +
-      (time.getMonth() + 1) +
-      "/" +
-      time.getFullYear()
-    );
-  }
 
-  function cadastrar() {
-    console.log(type);
+  async function cadastrar() {
     if (form.name === "" || form.valor === "" || form.categoria === "") {
       alert("Algum campo está vazio");
       return;
     }
     const novaTransacao = {
       ...form,
+      valor: Number.parseFloat(form.valor),
       tipo: type ? "entrada" : "saida",
-      data: formatDate()
     };
-    onNovaTransacao(novaTransacao);
+
+    const response = await postCriarTransacao(novaTransacao, localStorage.getItem("token"));
+    let auxNovaTransacao = localStorage.getItem("novaTransacao")? false:true
+    console.log(auxNovaTransacao)
+    localStorage.setItem("novaTransacao", auxNovaTransacao);
+    alert(response.mensagem);
+    
     setForm({
       nome: "",
       valor: 0,

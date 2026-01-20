@@ -12,7 +12,6 @@ export default function Login() {
 
   async function onClickEntrar() {
     const response = await postLogin(login);
-    console.log(response)
     if (response.status == 200) {
       alert(response.data.mensagem);
       navigate("/home");
