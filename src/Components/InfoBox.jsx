@@ -2,7 +2,7 @@ import { Box, Pagination } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { ItemMap } from "./ItemMap.jsx";
 
-export const InfoBox = ({lista, page, onChange}) => {
+export const InfoBox = ({lista, page, onChange, setGatilho}) => {
 
   return (
     <Box
@@ -15,7 +15,7 @@ export const InfoBox = ({lista, page, onChange}) => {
         gap: "10px",
       }}
     >
-      <ItemMap lista={lista.transacoes}></ItemMap>
+      <ItemMap lista={lista.transacoes} setGatilho={setGatilho}></ItemMap>
 
 
       <Pagination

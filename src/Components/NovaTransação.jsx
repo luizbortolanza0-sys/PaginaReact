@@ -5,11 +5,14 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { ButtonType } from "./ButtonType.jsx";
 import { postCriarTransacao } from "../service/post/postCriarTransacao.js";
+import Alerta from "./Alerta.jsx";
 
 export const NovaTransacao = ({ setGatilho }) => {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState(true);
   const [form, setForm] = useState([]);
+  const [alerta, setAlert] = useState(false);
+  const [mensagem, setMensagem] = useState("");
 
   function clickOpen() {
     setOpen(true);
@@ -22,6 +25,11 @@ export const NovaTransacao = ({ setGatilho }) => {
       ...form,
       [name]: valor,
     });
+  }
+  
+  function handleCadastro(response){
+    setAlert(true);
+    setMensagem(response);
   }
 
   async function cadastrar() {
@@ -39,16 +47,12 @@ export const NovaTransacao = ({ setGatilho }) => {
       novaTransacao,
       localStorage.getItem("token"),
     );
-    let auxNovaTransacao = localStorage.getItem("novaTransacao") ? false : true;
-    console.log(auxNovaTransacao);
-    localStorage.setItem("novaTransacao", auxNovaTransacao);
-    alert(response.mensagem);
-
     setForm({
       nome: "",
       valor: 0,
       categoria: "",
     });
+    return response.mensagem == undefined? response.erro : response.mensagem;
   }
 
   return (
@@ -144,7 +148,7 @@ export const NovaTransacao = ({ setGatilho }) => {
               value={true}
               onClick={(e) => {
                 setGatilho(e.target.value);
-                cadastrar();
+                handleCadastro(cadastrar());
               }}
               fullWidth="true"
               sx={{
@@ -174,6 +178,7 @@ export const NovaTransacao = ({ setGatilho }) => {
             <Close />
           </Button>
         </Card>
+        <Alerta > </Alerta>
       </Dialog>
     </>
   );

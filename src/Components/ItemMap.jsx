@@ -1,13 +1,12 @@
 import { Theme } from "../themes/theme";
 import { InfoCard } from "./InfoCard";
 
-export function ItemMap({ lista }) {
+export function ItemMap({ lista, setGatilho }) {
   if(lista == ""){
     return(<p style={{
       color:Theme.palette.primary.contrastText
     }}>Nenhuma transação encontrada!</p>);
   }
-
   return lista.map((item) => {
     const aux = item.tipo === "entrada";
 
@@ -19,8 +18,10 @@ export function ItemMap({ lista }) {
               maximumFractionDigits: 2,
             })}
         categoria={item.categoria}
-        data={item.data}
+        data={new Date(item.data).toLocaleDateString("pt-BR")}
         tipo={aux}
+        id={item.id}
+        setGatilho={setGatilho}
       />
     );
   });

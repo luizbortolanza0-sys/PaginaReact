@@ -10,7 +10,6 @@ import { getTransacoes } from "../service/get/getTransacoes.js";
 const MaxPerPagina = 10;
 
 const aux = await getTransacoes(1, 1, localStorage.getItem("token"));
-console.log(aux)
 
 function Home() {
   
@@ -24,12 +23,10 @@ function Home() {
       let transTotal = await getTransacoes(1, trans.paginacao.total, localStorage.getItem("token"));
       setTransacoes(transTotal);
       setLista(transTotal.transacoes);
-      console.log(transTotal.transacoes)
       setSearch(trans);
       setGatilho(false);
     }
     fetchApi();
-    console.log(transacoes);
   
   },[page, gatilho]);
 
@@ -113,7 +110,7 @@ function Home() {
           value={texto}
           onClick={() => searchGet()}
         />
-        <InfoBox lista={search} page={page} onChange={changePage} />
+        <InfoBox lista={search} page={page} onChange={changePage} setGatilho={setGatilho} />
       </Stack>
     </Stack>
   );
