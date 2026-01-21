@@ -7,28 +7,32 @@ import { InformacoesSaldo } from "../Components/InformacoesSaldo.jsx";
 import { useEffect, useState } from "react";
 import { getTransacoes } from "../service/get/getTransacoes.js";
 
-const MaxPaginas = 50;
 const MaxPerPagina = 10;
-localStorage.setItem("novaTransacao", true);
-console.log(localStorage.getItem("novaTransacao"))
 
-const aux = await getTransacoes(1, MaxPaginas, localStorage.getItem("token"));
+const aux = await getTransacoes(1, 1, localStorage.getItem("token"));
+console.log(aux)
 
 function Home() {
   
   const [page, setPage] = useState(1);
   const [texto, setTexto] = useState("");
+  const [gatilho, setGatilho] = useState(false);
   
   useEffect(() => {
     async function fetchApi() {
       let trans = await getTransacoes(page, MaxPerPagina, localStorage.getItem("token"));
-      setTransacoes(trans);
+      let transTotal = await getTransacoes(1, trans.paginacao.total, localStorage.getItem("token"));
+      setTransacoes(transTotal);
+      setLista(transTotal.transacoes);
+      console.log(transTotal.transacoes)
       setSearch(trans);
+      setGatilho(false);
     }
     fetchApi();
     console.log(transacoes);
-    
-  },[page, localStorage.getItem("novaTransacao")]);
+  
+  },[page, gatilho]);
+
   const [transacoes, setTransacoes] = useState(aux);
   const [search, setSearch] = useState(transacoes);
   const [lista, setLista] = useState(transacoes.transacoes);
@@ -92,7 +96,7 @@ function Home() {
             top: "4rem",
           }}
         >
-          <UpperHeader />
+          <UpperHeader setGatilho={setGatilho}/>
           <InformacoesSaldo lista={lista} />
         </Stack>
       </Stack>

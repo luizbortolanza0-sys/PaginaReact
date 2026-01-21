@@ -6,11 +6,11 @@ import { Close } from "@mui/icons-material";
 import { ButtonType } from "./ButtonType.jsx";
 import { postCriarTransacao } from "../service/post/postCriarTransacao.js";
 
-export const NovaTransacao = () => {
+export const NovaTransacao = ({ setGatilho }) => {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState(true);
   const [form, setForm] = useState([]);
-  
+
   function clickOpen() {
     setOpen(true);
   }
@@ -35,16 +35,19 @@ export const NovaTransacao = () => {
       tipo: type ? "entrada" : "saida",
     };
 
-    const response = await postCriarTransacao(novaTransacao, localStorage.getItem("token"));
-    let auxNovaTransacao = localStorage.getItem("novaTransacao")? false:true
-    console.log(auxNovaTransacao)
+    const response = await postCriarTransacao(
+      novaTransacao,
+      localStorage.getItem("token"),
+    );
+    let auxNovaTransacao = localStorage.getItem("novaTransacao") ? false : true;
+    console.log(auxNovaTransacao);
     localStorage.setItem("novaTransacao", auxNovaTransacao);
     alert(response.mensagem);
-    
+
     setForm({
       nome: "",
       valor: 0,
-      categoria: ""
+      categoria: "",
     });
   }
 
@@ -138,7 +141,11 @@ export const NovaTransacao = () => {
               </Box>
             </Box>
             <Button
-              onClick={cadastrar}
+              value={true}
+              onClick={(e) => {
+                setGatilho(e.target.value);
+                cadastrar();
+              }}
               fullWidth="true"
               sx={{
                 backgroundColor: Theme.palette.secundary.main,
