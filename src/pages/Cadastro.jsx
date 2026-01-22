@@ -4,42 +4,48 @@ import { TextBox } from "../Components/TextBox";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postCriarConta } from "../service/post/postCriarConta.js";
-
+import Alerta from "../Components/Alerta.jsx";
 
 export default function Cadastro() {
   const [senha, setSenha] = useState("password");
-  const [login,setLogin] = useState([]);
+  const [login, setLogin] = useState([]);
   const [confirmacaoSenha, setConfirmacaoSenha] = useState([]);
-  const navigate = useNavigate(); 
+  const [alerta, setAlert] = useState(false);
+  const [mensagem, setMensagem] = useState("");
+  const [tipoMensagem, setTipoMensagem] = useState("");
+  const navigate = useNavigate();
 
   async function handleClick() {
-    if(login.senha !== confirmacaoSenha.senhaConfirmada){
-      alert('as duas senhas nao estao iguais!');
+    if (login.senha !== confirmacaoSenha.senhaConfirmada) {
+      setMensagem("As duas senhas nao estao iguais!");
+      setAlert(true);
+      setTipoMensagem("error");
       return;
     }
     const response = await postCriarConta(login);
-    if(response.status == 200){
-      console.log(response.mensagem);
-      navigate('/');
+    const msg = response.mensagem ?? response.data.erro;
+    setMensagem(msg);
+    setAlert(true);
+    if (msg == response.data.erro) {
+      setTipoMensagem("error");
+      return;
     }
-    if(response.status == 400){
-      alert(response.data.erro);
-    }
-    if(response.status == 500){
-      alert(response.data.erro);
-    }
+    setTipoMensagem("success");
+    setTimeout(() => {
+      navigate("/");
+    }, 700);
   }
 
-  function onChange(name, value){
+  function onChange(name, value) {
     setLogin({
       ...login,
-      [name]:value,
+      [name]: value,
     });
   }
-  function onChangeConfimacao(name, value){
+  function onChangeConfimacao(name, value) {
     setConfirmacaoSenha({
       ...login,
-      [name]:value
+      [name]: value,
     });
   }
 
@@ -97,18 +103,18 @@ export default function Cadastro() {
               width: "100%",
             }}
           >
-            <TextBox 
-            label={"Nome de Usuario"} 
-            name={"login"}
-            value={login.login}
-            onChange={onChange}
+            <TextBox
+              label={"Nome de Usuario"}
+              name={"login"}
+              value={login.login}
+              onChange={onChange}
             />
-            <TextBox 
-            type={senha} 
-            label={"Senha"} 
-            name={"senha"}
-            value={login.senha}
-            onChange={onChange}
+            <TextBox
+              type={senha}
+              label={"Senha"}
+              name={"senha"}
+              value={login.senha}
+              onChange={onChange}
             />
             <TextBox
               type={senha}
@@ -170,6 +176,12 @@ export default function Cadastro() {
           </Box>
         </Box>
       </Card>
+      <Alerta
+        mensagem={mensagem}
+        classe={tipoMensagem}
+        aberto={alerta}
+        onClose={() => setAlert(false)}
+      />
     </Box>
   );
 }

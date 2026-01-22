@@ -13,6 +13,7 @@ export const NovaTransacao = ({ setGatilho }) => {
   const [form, setForm] = useState([]);
   const [alerta, setAlert] = useState(false);
   const [mensagem, setMensagem] = useState("");
+  const [tipoMensagem, setTipoMensagem] = useState("");
 
   function clickOpen() {
     setOpen(true);
@@ -26,17 +27,15 @@ export const NovaTransacao = ({ setGatilho }) => {
       [name]: valor,
     });
   }
-  
-  function handleCadastro(response){
-    setAlert(true);
-    setMensagem(response);
-  }
 
   async function cadastrar() {
     if (form.name === "" || form.valor === "" || form.categoria === "") {
-      alert("Algum campo está vazio");
+      setMensagem("Informações Faltando");
+      setTipoMensagem("error");
+      setAlert(true);
       return;
     }
+      
     const novaTransacao = {
       ...form,
       valor: Number.parseFloat(form.valor),
@@ -47,12 +46,19 @@ export const NovaTransacao = ({ setGatilho }) => {
       novaTransacao,
       localStorage.getItem("token"),
     );
+    const msg = response.mensagem ?? response.erro 
+    setMensagem(msg);
+    setAlert(true);
+    if(msg == response.erro){
+      setTipoMensagem("error");
+      return;
+    }
+    setTipoMensagem("success");
     setForm({
       nome: "",
       valor: 0,
       categoria: "",
     });
-    return response.mensagem == undefined? response.erro : response.mensagem;
   }
 
   return (
@@ -148,7 +154,7 @@ export const NovaTransacao = ({ setGatilho }) => {
               value={true}
               onClick={(e) => {
                 setGatilho(e.target.value);
-                handleCadastro(cadastrar());
+                cadastrar();
               }}
               fullWidth="true"
               sx={{
@@ -177,8 +183,13 @@ export const NovaTransacao = ({ setGatilho }) => {
           >
             <Close />
           </Button>
+          <Alerta
+            mensagem={mensagem}
+            classe={tipoMensagem}
+            aberto={alerta}
+            onClose={() => setAlert(false)}
+          />
         </Card>
-        <Alerta > </Alerta>
       </Dialog>
     </>
   );

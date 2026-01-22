@@ -1,31 +1,27 @@
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { useState } from "react";
 
-export default function Alerta({mensagem, classe, aberto }) {
-  const [open, setOpen] = useState(true);
-
+export default function Alerta({ mensagem, classe, aberto, onClose }) {
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
+    if (reason === "clickaway") return;
+    onClose();
   };
 
   return (
-    <div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity={classe}
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {mensagem}
-        </Alert>
-      </Snackbar>
-    </div>
+    <Snackbar
+      open={aberto}
+      autoHideDuration={2000}
+      onClose={handleClose}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+    >
+      <Alert
+        onClose={handleClose}
+        severity={classe}
+        variant="filled"
+        sx={{ width: "100%" }}
+      >
+        {mensagem}
+      </Alert>
+    </Snackbar>
   );
 }

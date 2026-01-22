@@ -4,27 +4,30 @@ import { TextBox } from "../Components/TextBox";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../service/post/postLogin.js";
+import Alerta from "../Components/Alerta.jsx";
 
 export default function Login() {
   const [senha, setSenha] = useState("password");
   const [login, setLogin] = useState([]);
+  const [alerta, setAlert] = useState(false);
+  const [mensagem, setMensagem] = useState("");
+  const [tipoMensagem, setTipoMensagem] = useState("");
   const navigate = useNavigate();
 
   async function onClickEntrar() {
     const response = await postLogin(login);
-    if (response.status == 200) {
-      alert(response.data.mensagem);
+
+    let msg = response.data.mensagem ?? response.data.erro;
+    setMensagem(msg);
+    setAlert(true);
+    if (msg == response.data.erro) {
+      setTipoMensagem("error");
+      return;
+    }
+    setTipoMensagem("success");
+    setTimeout(() => {
       navigate("/home");
-    }
-    if (response.status == 400) {
-      alert(response.data.erro);
-    }
-    if (response.status == 401) {
-      alert(response.data.erro);
-    }
-    if (response.status == 500) {
-      alert(response.data.erro);
-    }
+    }, 700);
   }
   function onClickCadastrar() {
     navigate("/cadastro");
@@ -185,6 +188,12 @@ export default function Login() {
           </Box>
         </Box>
       </Card>
+      <Alerta
+        mensagem={mensagem}
+        classe={tipoMensagem}
+        aberto={alerta}
+        onClose={() => setAlert(false)}
+      />
     </Box>
   );
 }
