@@ -11,6 +11,7 @@ const MaxPerPagina = 10;
 
 const aux = await getTransacoes(1, 1, localStorage.getItem("token"));
 
+
 function Home() {
   
   const [page, setPage] = useState(1);
@@ -22,7 +23,7 @@ function Home() {
       let trans = await getTransacoes(page, MaxPerPagina, localStorage.getItem("token"));
       let transTotal = await getTransacoes(1, trans.paginacao.total, localStorage.getItem("token"));
       setTransacoes(transTotal);
-      setLista(transTotal.transacoes);
+      setLista(transTotal);
       setSearch(trans);
       setGatilho(false);
     }
@@ -32,8 +33,7 @@ function Home() {
 
   const [transacoes, setTransacoes] = useState(aux);
   const [search, setSearch] = useState(transacoes);
-  const [lista, setLista] = useState(transacoes.transacoes);
-
+  const [lista, setLista] = useState(transacoes);
   
 
   function searchChange(name, value) {
@@ -45,13 +45,13 @@ function Home() {
 
   function searchGet() {
     if (texto.trim() === "") {
-      setSearch(transacoes);
+      setGatilho(true);
       return;
     }
 
     setSearch({
       ...search,
-      transacoes: lista.filter((item) =>
+      transacoes: lista.transacoes.filter((item) =>
         item.nome.toLowerCase().includes(texto.toLowerCase()),
       ),
     }
@@ -94,7 +94,7 @@ function Home() {
           }}
         >
           <UpperHeader setGatilho={setGatilho}/>
-          <InformacoesSaldo lista={lista} />
+          <InformacoesSaldo lista={lista.resumo} />
         </Stack>
       </Stack>
 

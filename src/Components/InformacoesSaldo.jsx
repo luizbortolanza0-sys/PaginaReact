@@ -5,36 +5,10 @@ import {
   ArrowCircleDown,
 } from "@mui/icons-material";
 import { Theme } from "../themes/theme.js";
-import { useState, useEffect } from "react";
+
 
 export const InformacoesSaldo = ({ lista }) => {
-  const [valores, setValores] = useState({
-    entrada: 0,
-    saida: 0,
-    total: 0,
-  });
-
-  useEffect(() => {
-    let entradaTotal = 0;
-    let saidaTotal = 0;
-
-    lista.forEach((item) => {
   
-      if (item.tipo == "entrada") {
-        entradaTotal += parseFloat(String(item.valor).replace(",", "."));
-      }
-      if (item.tipo == "saida") {
-        saidaTotal += Math.abs(
-          parseFloat(String(item.valor).replace(",", "."))
-        );
-      }
-    });
-    setValores({
-      entrada: entradaTotal,
-      saida: saidaTotal,
-      total: entradaTotal - saidaTotal,
-    });
-  }, [lista]);
 
   function CardSaldos({ info, name, Icon, color }) {
     let bgcolor = Theme.palette.primary.main;
@@ -104,19 +78,20 @@ export const InformacoesSaldo = ({ lista }) => {
       }}
     >
       <CardSaldos
-        info={valores.entrada}
+        info={lista.entradas
+}
         name="Entradas"
         color={Theme.palette.primary.light}
         Icon={ArrowCircleUp}
       />
       <CardSaldos
-        info={valores.saida}
+        info={lista.saidas}
         name="Saidas"
         color={Theme.palette.primary.negative}
         Icon={ArrowCircleDown}
       />
       <CardSaldos
-        info={valores.total}
+        info={lista.total}
         name="Total"
         color={Theme.palette.primary.contrastText}
         Icon={AttachMoney}

@@ -129,7 +129,7 @@ export const NovaTransacao = ({ setGatilho }) => {
               <TextBox
                 type={"number"}
                 label={"Preço"}
-                value={Number.parseFloat(form.valor)}
+                value={form.valor}
                 name="valor"
                 onChange={pegarMudanca}
               />
