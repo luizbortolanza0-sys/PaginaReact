@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axiosInterceptor';
 
 export const api = axios.create({
   baseURL: 'http://72.60.54.143:3000',

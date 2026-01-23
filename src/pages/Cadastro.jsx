@@ -23,10 +23,10 @@ export default function Cadastro() {
       return;
     }
     const response = await postCriarConta(login);
-    const msg = response.mensagem ?? response.data.erro;
+    const msg = response.mensagem == undefined ? response.data.erro : response.mensagem
     setMensagem(msg);
     setAlert(true);
-    if (msg == response.data.erro) {
+    if (response.status == 400) {
       setTipoMensagem("error");
       return;
     }
