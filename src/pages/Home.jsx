@@ -8,9 +8,7 @@ import { useEffect, useState } from "react";
 import { getTransacoes } from "../service/get/getTransacoes.js";
 
 const MaxPerPagina = 10;
-
-const aux = await getTransacoes(1, 1, localStorage.getItem("token"));
-
+const startFetch = await getTransacoes(1, 1, localStorage.getItem("token"))
 
 function Home() {
   
@@ -31,7 +29,7 @@ function Home() {
   
   },[page, gatilho]);
 
-  const [transacoes, setTransacoes] = useState(aux);
+  const [transacoes, setTransacoes] = useState(startFetch);
   const [search, setSearch] = useState(transacoes);
   const [lista, setLista] = useState(transacoes);
   

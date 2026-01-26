@@ -15,7 +15,7 @@ export const InfoBox = ({lista, page, onChange, setGatilho}) => {
         gap: "10px",
       }}
     >
-      <ItemMap lista={lista.transacoes} setGatilho={setGatilho}></ItemMap>
+      <ItemMap lista={lista.transacoes} setGatilho={setGatilho} ></ItemMap>
 
 
       <Pagination

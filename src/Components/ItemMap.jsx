@@ -12,6 +12,7 @@ export function ItemMap({ lista, setGatilho }) {
 
     return (
       <InfoCard
+        key={item.id}
         descricao={item.nome}
         preco={parseFloat(item.valor).toLocaleString("pt-BR", {
               minimumFractionDigits: 2,
