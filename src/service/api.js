@@ -9,20 +9,25 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
+
+    const originalRequest = error.config;
     
-    if (error.response.status === 401 && !error.config._retry && !error.config.skipAuthRefresh) {
-      error.config._retry = true;
+    if (error.response.status === 401 && !originalRequest._retry && !error.config.skipAuthRefresh) {
+      originalRequest._retry = true;
       error.config.skipAuthRefresh = false;
       try {
+        
         const newToken = await postRefreshToken(
           localStorage.getItem("refreshToken"),
         );
-        console.log(newToken)
-
         localStorage.setItem("token", newToken);
-        return api(error.config);
+        
+        
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        
+
+        return api(originalRequest);
       } catch (err) {
-        console.log(err)
         localStorage.clear();
         return Promise.reject(err);
       }
