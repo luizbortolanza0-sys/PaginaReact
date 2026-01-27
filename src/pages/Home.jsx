@@ -18,12 +18,13 @@ function Home() {
   
   useEffect(() => {
     async function fetchApi() {
+      setGatilho(false);
       let trans = await getTransacoes(page, MaxPerPagina, localStorage.getItem("token"));
       let transTotal = await getTransacoes(1, trans.paginacao.total, localStorage.getItem("token"));
       setTransacoes(transTotal);
       setLista(transTotal);
       setSearch(trans);
-      setGatilho(false);
+      
     }
     fetchApi();
   

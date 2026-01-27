@@ -16,8 +16,9 @@ export default function Login() {
 
   async function onClickEntrar() {
     const response = await postLogin(login);
-
-    let msg = response.data.mensagem ?? response.data.erro;
+    console.log(response)
+    console.log(response.data.erro)
+    let msg = response.data.erro ?? response.data.mensagem;
     setMensagem(msg);
     setAlert(true);
     if (msg == response.data.erro) {

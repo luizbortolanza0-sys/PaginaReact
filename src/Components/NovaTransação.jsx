@@ -151,9 +151,8 @@ export const NovaTransacao = ({ setGatilho }) => {
               </Box>
             </Box>
             <Button
-              value={true}
-              onClick={(e) => {
-                setGatilho(e.target.value);
+              onClick={() => {
+                setGatilho(true);
                 cadastrar();
               }}
               fullWidth="true"
