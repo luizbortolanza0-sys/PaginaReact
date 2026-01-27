@@ -12,8 +12,8 @@ api.interceptors.response.use(
 
     const originalRequest = error.config;
     
-    if (error.response.status === 401 && !originalRequest._retry && !originalRequest.skipAuthRefresh) {
-      originalRequest._retry = true;
+    if (error.response.status === 401 && !originalRequest.skipAuthRefresh) {
+      
       try {
         
         const newToken = await postRefreshToken(
@@ -27,7 +27,6 @@ api.interceptors.response.use(
 
         return api(originalRequest);
       } catch (err) {
-        localStorage.clear();
         return Promise.reject(err);
       }
     }
