@@ -12,9 +12,8 @@ api.interceptors.response.use(
 
     const originalRequest = error.config;
     
-    if (error.response.status === 401 && !originalRequest._retry && !error.config.skipAuthRefresh) {
+    if (error.response.status === 401 && !originalRequest._retry && !originalRequest.skipAuthRefresh) {
       originalRequest._retry = true;
-      error.config.skipAuthRefresh = false;
       try {
         
         const newToken = await postRefreshToken(
