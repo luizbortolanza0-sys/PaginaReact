@@ -8,7 +8,7 @@ export function ItemMap({ lista, setGatilho }) {
     }}>Nenhuma transação encontrada!</p>);
   }
   return lista.map((item) => {
-    const aux = item.tipo === "entrada";
+    const auxBooleanoParaTipo = item.tipo === "entrada";
 
     return (
       <InfoCard
@@ -20,7 +20,7 @@ export function ItemMap({ lista, setGatilho }) {
             })}
         categoria={item.categoria}
         data={new Date(item.data).toLocaleDateString("pt-BR")}
-        tipo={aux}
+        tipo={auxBooleanoParaTipo}
         id={item.id}
         setGatilho={setGatilho}
       />
