@@ -7,6 +7,7 @@ import { InformacoesSaldo } from "../Components/InformacoesSaldo.jsx";
 import { useEffect, useState } from "react";
 import { getTransacoes } from "../service/get/getTransacoes.js";
 
+
 const MaxPerPagina = 10;
 const startFetch = await getTransacoes(1, 1, localStorage.getItem("token"))
 
@@ -116,3 +117,4 @@ function Home() {
 }
 
 export default Home;
+

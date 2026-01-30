@@ -12,18 +12,26 @@ api.interceptors.response.use(
 
     const originalRequest = error.config;
     
-    if (error.response.status === 401 && !originalRequest.skipAuthRefresh) {
-      
+    
+    if (error.response.status === 401 && !error.config._retry && !originalRequest.skipAuthRefresh) {      
+      error.config._retry = true;
       try {
-        
+        console.log("passou auqi")
         const newToken = await postRefreshToken(
           localStorage.getItem("refreshToken"),
         );
-        localStorage.setItem("token", newToken);
+        console.log (newToken);
+        console.log (newToken.refreshToken == localStorage.getItem("refreshToken"))
+        if(newToken.refreshToken != undefined && newToken.token != undefined){
+          localStorage.setItem("refreshToken", newToken.refreshToken);
+          localStorage.setItem("token", newToken.token);
+        }
+        
         
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return api(originalRequest);
       } catch (err) {
+        localStorage.clear();
         return Promise.reject(err);
       }
     }

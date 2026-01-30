@@ -6,8 +6,8 @@ export async function postRefreshToken(token) {
   }
   try {
     const response = await api.post("/api/refresh-token", refresh);
-    return response.data.token;
+    return response.data;
   } catch (error) {
-    return error.response.data;
+    return error
   }
 }

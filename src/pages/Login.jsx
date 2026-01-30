@@ -26,6 +26,7 @@ export default function Login() {
     setTipoMensagem("success");
     setTimeout(() => {
       navigate("/home");
+      window.location.reload();
     }, 700);
   }
   function onClickCadastrar() {

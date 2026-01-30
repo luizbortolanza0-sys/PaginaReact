@@ -10,7 +10,6 @@ export async function getTransacoes(pagina, quantidade, token) {
         },
       },
     );
-    console.log(response);
     return response.data;
   } catch (error) {
     return error.response;
