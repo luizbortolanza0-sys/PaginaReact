@@ -2,7 +2,7 @@ import { Button, Card, Dialog, Box } from "@mui/material";
 import { TextBox } from "./TextBox.jsx";
 import { Theme } from "../themes/theme.js";
 import { useState } from "react";
-import { Close } from "@mui/icons-material";
+import CloseIcon from '@mui/icons-material/Close';
 import { ButtonType } from "./ButtonType.jsx";
 import { postCriarTransacao } from "../service/post/postCriarTransacao.js";
 import Alerta from "./Alerta.jsx";
@@ -180,7 +180,7 @@ export const NovaTransacao = ({ setGatilho }) => {
               top: "18px",
             }}
           >
-            <Close />
+            <CloseIcon/>
           </Button>
           <Alerta
             mensagem={mensagem}

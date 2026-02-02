@@ -3,7 +3,6 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Cadastro from "./pages/Cadastro.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
-import { useState } from "react";
 
 function App() {
   return (

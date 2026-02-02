@@ -1,9 +1,7 @@
 import { Box, Card } from "@mui/material";
-import {
-  AttachMoney,
-  ArrowCircleUp,
-  ArrowCircleDown,
-} from "@mui/icons-material";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { Theme } from "../themes/theme.js";
 
 
@@ -82,19 +80,19 @@ export const InformacoesSaldo = ({ lista }) => {
 }
         name="Entradas"
         color={Theme.palette.primary.light}
-        Icon={ArrowCircleUp}
+        Icon={ArrowCircleUpIcon}
       />
       <CardSaldos
         info={lista.saidas}
         name="Saidas"
         color={Theme.palette.primary.negative}
-        Icon={ArrowCircleDown}
+        Icon={ArrowCircleDownIcon}
       />
       <CardSaldos
         info={lista.total}
         name="Total"
         color={Theme.palette.primary.contrastText}
-        Icon={AttachMoney}
+        Icon={AttachMoneyIcon}
       />
     </Box>
   );

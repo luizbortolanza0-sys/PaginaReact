@@ -1,6 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { Search } from "@mui/icons-material";
-import { TextBox } from "./TextBox";
+import SearchIcon from '@mui/icons-material/Search';import { TextBox } from "./TextBox";
 import { Theme } from "../themes/theme";
 
 export const SearchBar = ({onChange, onClick, value}) => {
@@ -34,7 +33,7 @@ export const SearchBar = ({onChange, onClick, value}) => {
           },
         }}
       >
-        <Search />
+        <SearchIcon />
         <p style={{ paddingLeft: "3px" }}>Buscar</p>
       </Button>
     </Box>

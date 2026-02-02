@@ -6,6 +6,8 @@ const api = axios.create({
   timeout: 1000,
 });
 
+
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -16,7 +18,6 @@ api.interceptors.response.use(
     if (error.response.status === 401 && !error.config._retry && !originalRequest.skipAuthRefresh) {      
       error.config._retry = true;
       try {
-        console.log("passou auqi")
         const newToken = await postRefreshToken(
           localStorage.getItem("refreshToken"),
         );
@@ -28,7 +29,7 @@ api.interceptors.response.use(
         }
         
         
-        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        originalRequest.headers.Authorization = `Bearer ${newToken.token}`;
         return api(originalRequest);
       } catch (err) {
         localStorage.clear();

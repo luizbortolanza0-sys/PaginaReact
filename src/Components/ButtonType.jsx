@@ -1,4 +1,5 @@
-import { ArrowCircleDown, ArrowCircleUp } from "@mui/icons-material";
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Button, Box } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { useState } from "react";
@@ -59,13 +60,13 @@ export const ButtonType = ({onChange}) => {
         onClick={() => onChange(true)}
         type={"Entrada"}
         cor={Theme.palette.secundary.main}
-        Icon={ArrowCircleUp}
+        Icon={ArrowCircleUpIcon}
       />
       <Buttons
         onClick={()=> onChange(false)}
         type={"Saida"}
         cor={Theme.palette.primary.negative}
-        Icon={ArrowCircleDown}
+        Icon={ArrowCircleDownIcon}
       />
     </>
   );
