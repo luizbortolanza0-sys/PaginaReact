@@ -21,8 +21,6 @@ api.interceptors.response.use(
         const newToken = await postRefreshToken(
           localStorage.getItem("refreshToken"),
         );
-        console.log (newToken);
-        console.log (newToken.refreshToken == localStorage.getItem("refreshToken"))
         if(newToken.refreshToken != undefined && newToken.token != undefined){
           localStorage.setItem("refreshToken", newToken.refreshToken);
           localStorage.setItem("token", newToken.token);
