@@ -4,18 +4,20 @@ import { TextBox } from "../Components/TextBox";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../service/post/postLogin.js";
+import { useForm } from "react-hook-form"
 import Alerta from "../Components/Alerta.jsx";
 
 export default function Login() {
+
+  const { handleSubmit, watch, control } = useForm();
   const [senha, setSenha] = useState("password");
-  const [login, setLogin] = useState([]);
   const [alerta, setAlert] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [tipoMensagem, setTipoMensagem] = useState("");
   const navigate = useNavigate();
 
-  async function onClickEntrar() {
-    const response = await postLogin(login);
+  async function handleLogin(data) {
+    const response = await postLogin(data);
     let msg = response.data.erro ?? response.data.mensagem;
     setMensagem(msg);
     setAlert(true);
@@ -29,15 +31,9 @@ export default function Login() {
       window.location.reload();
     }, 700);
   }
+
   function onClickCadastrar() {
     navigate("/cadastro");
-  }
-
-  function onChange(name, value) {
-    setLogin({
-      ...login,
-      [name]: value,
-    });
   }
 
   function handleChange() {
@@ -75,6 +71,8 @@ export default function Login() {
         }}
       >
         <Box
+          component={"form"}
+          onSubmit={handleSubmit((data) => handleLogin(data))}
           sx={{
             display: "flex",
             alignItems: "flex-start",
@@ -97,15 +95,13 @@ export default function Login() {
             <TextBox
               label={"Nome de Usuario"}
               name={"login"}
-              value={login.login}
-              onChange={onChange}
+              control={control}
             />
             <TextBox
               type={senha}
               label={"Senha"}
               name={"senha"}
-              value={login.senha}
-              onChange={onChange}
+              control={control}
             />
             <Box
               sx={{
@@ -152,7 +148,7 @@ export default function Login() {
             }}
           >
             <Button
-              onClick={onClickEntrar}
+              type="submit"
               sx={{
                 backgroundColor: Theme.palette.secundary.main,
                 color: Theme.palette.primary.contrastText,

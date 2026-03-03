@@ -5,7 +5,9 @@ export async function postRefreshToken(token) {
     refreshToken : token
   }
   try {
-    const response = await api.post("/api/refresh-token", refresh);
+    const response = await api.post("/api/refresh-token", refresh, {
+      firstLoginTry:true
+    });
     return response.data;
   } catch (error) {
     return error

@@ -4,25 +4,31 @@ import { TextBox } from "../Components/TextBox";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postCriarConta } from "../service/post/postCriarConta.js";
+import { useForm } from "react-hook-form";
 import Alerta from "../Components/Alerta.jsx";
 
 export default function Cadastro() {
+  
+  const {control, handleSubmit, watch} = useForm();
   const [senha, setSenha] = useState("password");
-  const [login, setLogin] = useState([]);
   const [confirmacaoSenha, setConfirmacaoSenha] = useState([]);
   const [alerta, setAlert] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [tipoMensagem, setTipoMensagem] = useState("");
   const navigate = useNavigate();
 
-  async function handleClick() {
-    if (login.senha !== confirmacaoSenha.senhaConfirmada) {
+  async function handleCadastro(data) {
+    if (data.senha !== data.senhaConfirmada) {
       setMensagem("As duas senhas nao estao iguais!");
       setAlert(true);
       setTipoMensagem("error");
       return;
     }
-    const response = await postCriarConta(login);
+    const response = await postCriarConta({
+      login: data.login,
+      senha: data.senha
+    });
+    
     const msg = response.mensagem == undefined ? response.data.erro : response.mensagem
     setMensagem(msg);
     setAlert(true);
@@ -34,19 +40,6 @@ export default function Cadastro() {
     setTimeout(() => {
       navigate("/");
     }, 700);
-  }
-
-  function onChange(name, value) {
-    setLogin({
-      ...login,
-      [name]: value,
-    });
-  }
-  function onChangeConfimacao(name, value) {
-    setConfirmacaoSenha({
-      ...login,
-      [name]: value,
-    });
   }
 
   function handleChange() {
@@ -84,6 +77,8 @@ export default function Cadastro() {
         }}
       >
         <Box
+          component={"form"}
+          onSubmit={handleSubmit((data)=> handleCadastro(data))}
           sx={{
             display: "flex",
             alignItems: "flex-start",
@@ -106,22 +101,19 @@ export default function Cadastro() {
             <TextBox
               label={"Nome de Usuario"}
               name={"login"}
-              value={login.login}
-              onChange={onChange}
+              control={control}
             />
             <TextBox
               type={senha}
               label={"Senha"}
               name={"senha"}
-              value={login.senha}
-              onChange={onChange}
+              control={control}
             />
             <TextBox
               type={senha}
               label={"Confirmar senha"}
               name={"senhaConfirmada"}
-              value={confirmacaoSenha.senhaConfirmada}
-              onChange={onChangeConfimacao}
+              control={control}
             />
             <Box
               sx={{
@@ -157,7 +149,7 @@ export default function Cadastro() {
             }}
           >
             <Button
-              onClick={handleClick}
+              type={"submit"}
               sx={{
                 backgroundColor: Theme.palette.secundary.main,
                 color: Theme.palette.primary.contrastText,

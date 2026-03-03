@@ -1,10 +1,18 @@
 import { Box, Button } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';import { TextBox } from "./TextBox";
 import { Theme } from "../themes/theme";
+import { useForm } from "react-hook-form"
 
-export const SearchBar = ({onChange, onClick, value}) => {
+export const SearchBar = ({onChange, onClick}) => {
+  
+  const {handleSubmit, control, watch} = useForm();
+
   return (
     <Box
+      component={"form"}
+      onSubmit={handleSubmit((data)=>{
+        onClick(data?.search);
+      })}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -12,10 +20,15 @@ export const SearchBar = ({onChange, onClick, value}) => {
         gap: "20px",
       }}
     >
-      <TextBox type={"text"} onChange={onChange} name="search" value={value} label ={"Busque uma Transação"} />
+      <TextBox 
+      type={"text"}  
+      label ={"Busque uma Transação"} 
+      control ={control}
+      name={"search"}
+      />
 
       <Button
-        onClick={onClick}
+        type="submit"
         variant="contained"
         size="medium"
         disableElevation={true}

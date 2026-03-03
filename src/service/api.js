@@ -15,7 +15,10 @@ api.interceptors.response.use(
     const originalRequest = error.config;
     
     
-    if (error.response.status === 401 && !error.config._retry && !originalRequest.skipAuthRefresh) {      
+    if (error.response.status === 401 
+      && !error.config._retry 
+      && !originalRequest.skipAuthRefresh
+      && !originalRequest.firstLoginTry) {      
       error.config._retry = true;
       try {
         const newToken = await postRefreshToken(

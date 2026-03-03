@@ -5,12 +5,14 @@ import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import { ButtonType } from "./ButtonType.jsx";
 import { postCriarTransacao } from "../service/post/postCriarTransacao.js";
+import { useForm } from "react-hook-form";
 import Alerta from "./Alerta.jsx";
 
 export const NovaTransacao = ({ setGatilho }) => {
+
+  const { control, handleSubmit, setValue, reset } = useForm();
   const [open, setOpen] = useState(false);
-  const [type, setType] = useState(true);
-  const [form, setForm] = useState([]);
+  setValue("tipo", "entrada");
   const [alerta, setAlert] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [tipoMensagem, setTipoMensagem] = useState("");
@@ -21,29 +23,20 @@ export const NovaTransacao = ({ setGatilho }) => {
   function clickClose() {
     setOpen(false);
   }
-  function pegarMudanca(name, valor) {
-    setForm({
-      ...form,
-      [name]: valor,
-    });
-  }
 
-  async function cadastrar() {
-    if (form.name === "" || form.valor === "" || form.categoria === "") {
+  async function cadastrar(data) {
+
+    console.log(data)
+
+    if (data.nome == undefined || data.valor == undefined || data.categoria == undefined) {
       setMensagem("Informações Faltando");
       setTipoMensagem("error");
       setAlert(true);
       return;
     }
-      
-    const novaTransacao = {
-      ...form,
-      valor: Number.parseFloat(form.valor),
-      tipo: type ? "entrada" : "saida",
-    };
 
     const response = await postCriarTransacao(
-      novaTransacao,
+      data,
       localStorage.getItem("token"),
     );
     const msg = response.mensagem ?? response.erro 
@@ -54,11 +47,7 @@ export const NovaTransacao = ({ setGatilho }) => {
       return;
     }
     setTipoMensagem("success");
-    setForm({
-      nome: "",
-      valor: 0,
-      categoria: "",
-    });
+    reset();
   }
 
   return (
@@ -103,6 +92,11 @@ export const NovaTransacao = ({ setGatilho }) => {
           }}
         >
           <Box
+            component={"form"}
+            onSubmit={handleSubmit((data)=>{
+                cadastrar(data);
+                setGatilho(true);
+            })}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -122,23 +116,20 @@ export const NovaTransacao = ({ setGatilho }) => {
               <TextBox
                 type={"text"}
                 label={"Descrição"}
-                value={form.nome}
                 name="nome"
-                onChange={pegarMudanca}
+                control={control}
               />
               <TextBox
                 type={"number"}
                 label={"Preço"}
-                value={form.valor}
                 name="valor"
-                onChange={pegarMudanca}
+                control={control}
               />
               <TextBox
                 type={"text"}
                 label={"Categoria"}
-                value={form.categoria}
                 name={"categoria"}
-                onChange={pegarMudanca}
+                control={control}
               />
               <Box
                 sx={{
@@ -147,14 +138,11 @@ export const NovaTransacao = ({ setGatilho }) => {
                   gap: "10px",
                 }}
               >
-                <ButtonType onChange={setType} />
+                <ButtonType onChange={setValue} />
               </Box>
             </Box>
             <Button
-              onClick={() => {
-                setGatilho(true);
-                cadastrar();
-              }}
+              type="submit"
               fullWidth="true"
               sx={{
                 backgroundColor: Theme.palette.secundary.main,

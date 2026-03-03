@@ -57,13 +57,13 @@ export const ButtonType = ({onChange}) => {
   return (
     <>
       <Buttons
-        onClick={() => onChange(true)}
+        onClick={() => onChange("tipo","entrada")}
         type={"Entrada"}
         cor={Theme.palette.secundary.main}
         Icon={ArrowCircleUpIcon}
       />
       <Buttons
-        onClick={()=> onChange(false)}
+        onClick={()=> onChange("tipo", "saida")}
         type={"Saida"}
         cor={Theme.palette.primary.negative}
         Icon={ArrowCircleDownIcon}

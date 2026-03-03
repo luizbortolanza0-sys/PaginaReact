@@ -36,15 +36,12 @@ function Home() {
   const [lista, setLista] = useState(transacoes);
   
 
-  function searchChange(name, value) {
-    setTexto(value);
-  }
   const changePage = (event, value)=>{
     setPage(value);
   }
 
-  function searchGet() {
-    if (texto.trim() === "") {
+  function searchGet(text) {
+    if (text.trim() === "") {
       setGatilho(true);
       return;
     }
@@ -52,7 +49,7 @@ function Home() {
     setSearch({
       ...search,
       transacoes: lista.transacoes.filter((item) =>
-        item.nome.toLowerCase().includes(texto.toLowerCase()),
+        item.nome.toLowerCase().includes(text.toLowerCase()),
       ),
     }
     );
@@ -106,9 +103,7 @@ function Home() {
         }}
       >
         <SearchBar
-          onChange={searchChange}
-          value={texto}
-          onClick={() => searchGet()}
+          onClick={(data) => searchGet(data)}
         />
         <InfoBox lista={search} page={page} onChange={changePage} setGatilho={setGatilho} />
       </Stack>
