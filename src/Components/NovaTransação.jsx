@@ -26,8 +26,6 @@ export const NovaTransacao = ({ setGatilho }) => {
 
   async function cadastrar(data) {
 
-    console.log(data)
-
     if (data.nome == undefined || data.valor == undefined || data.categoria == undefined) {
       setMensagem("Informações Faltando");
       setTipoMensagem("error");
@@ -51,7 +49,8 @@ export const NovaTransacao = ({ setGatilho }) => {
   }
 
   return (
-    <>
+    <Box
+    >
       <Button
         onClick={clickOpen}
         variant="contained"
@@ -59,7 +58,9 @@ export const NovaTransacao = ({ setGatilho }) => {
         sx={{
           backgroundColor: Theme.palette.secundary.main,
           color: Theme.palette.primary.contrastText,
-          fontSize: "14px",
+          py:"7px",
+          px:"10px",
+          fontSize: {xs:'10.5px', sm :"14px"},
           textTransform: "none",
           "&:hover": {
             backgroundColor: Theme.palette.primary.light,
@@ -70,9 +71,13 @@ export const NovaTransacao = ({ setGatilho }) => {
       </Button>
       <Dialog
         open={open}
+        fullScreen
         slotProps={{
           paper: {
             sx: {
+              display:"flex",
+              alignItems:"center",
+              justifyContent:{xs:"flex-end", sm:"center"},
               backgroundColor: "transparent",
               boxShadow: "none",
               borderRadius: "10px",
@@ -82,15 +87,17 @@ export const NovaTransacao = ({ setGatilho }) => {
       >
         <Card
           sx={{
+            position:"relative",
             display: "flex",
             flexDirection: "column",
-            width: "33rem",
-            height: "28rem",
+            width:{xs:"100%", sm:"40%"},
+            height: {xs:"58%", md:"70%"},
             alignItems: "center",
             color: Theme.palette.primary.contrastText,
             backgroundColor: Theme.palette.background.body,
           }}
         >
+          
           <Box
             component={"form"}
             onSubmit={handleSubmit((data)=>{
@@ -178,6 +185,6 @@ export const NovaTransacao = ({ setGatilho }) => {
           />
         </Card>
       </Dialog>
-    </>
+    </Box>
   );
 };

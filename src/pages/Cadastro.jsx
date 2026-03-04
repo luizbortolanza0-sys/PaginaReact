@@ -69,8 +69,8 @@ export default function Cadastro() {
         sx={{
           display: "flex",
           backgroundColor: Theme.palette.primary.main,
-          height: "60%",
-          width: "35%",
+          height: {xs:"40%", md:"60%"},
+          width: { xs: "90%", md: "35%" },
           justifyContent: "center",
           alignItems: "center",
           borderRadius: "15px",

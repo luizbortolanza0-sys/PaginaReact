@@ -1,4 +1,4 @@
-import { Box, Button, Card, Checkbox } from "@mui/material";
+import { Box, Button, Card, Checkbox, Typography } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { TextBox } from "../Components/TextBox";
 import { useState } from "react";
@@ -63,8 +63,8 @@ export default function Login() {
         sx={{
           display: "flex",
           backgroundColor: Theme.palette.primary.main,
-          height: "60%",
-          width: "35%",
+          height: {xs:"40%", md:"60%"},
+          width: { xs: "90%", md: "35%" },
           justifyContent: "center",
           alignItems: "center",
           borderRadius: "15px",
@@ -108,36 +108,44 @@ export default function Login() {
                 display: "flex",
                 alignItems: "center",
                 height: "20px",
+                justifyContent: "space-between"
               }}
             >
-              <Checkbox
-                onChange={handleChange}
-                size="small"
-                label="Teste"
-                sx={{
-                  color: Theme.palette.secundary.main,
-                  width: "10%",
-                }}
-              />{" "}
-              <p
-                style={{
-                  color: Theme.palette.primary.contrastText,
-                  fontSize: "12px",
-                }}
+              
+              <Box 
+              display={"flex"}
+              alignItems={"center"}
               >
-                Exibir Senha
-              </p>
-              <a
+                <Checkbox
+                  onChange={handleChange}
+                  size="small"
+                  sx={{
+                    color: Theme.palette.secundary.main,
+                    width: "10%",
+                  }}
+                />{" "}
+                <p
+                  style={{
+                    color: Theme.palette.primary.contrastText,
+                    fontSize: "12px",
+                  }}
+                >
+                  Exibir Senha
+                </p>
+              </Box>
+
+              <Typography
+                component={'a'}
+                variant="caption"
                 href="/"
                 style={{
-                  paddingLeft: "150px",
                   textDecoration: "none",
                   color: Theme.palette.primary.contrastText,
                   fontSize: "12px",
                 }}
               >
                 Esqueceu a senha?
-              </a>
+              </Typography>
             </Box>
           </Box>
           <Box

@@ -1,5 +1,6 @@
-import { Box, Button } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';import { TextBox } from "./TextBox";
+import { Box, Button, Typography } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
+import { TextBox } from "./TextBox";
 import { Theme } from "../themes/theme";
 import { useForm } from "react-hook-form"
 
@@ -37,7 +38,7 @@ export const SearchBar = ({onChange, onClick}) => {
           border: "1px solid" + Theme.palette.primary.dark,
           color: Theme.palette.primary.dark,
           fontSize: "14px",
-          padding: "6.75px 25px 6.75px 25px",
+          padding: {xs:"6.75px, 20px, 6.75px, 20px", sm :"6.75px 25px 6.75px 25px"},
           textTransform: "none",
           "&:hover": {
             backgroundColor: Theme.palette.secundary.main,
@@ -46,8 +47,13 @@ export const SearchBar = ({onChange, onClick}) => {
           },
         }}
       >
-        <SearchIcon />
-        <p style={{ paddingLeft: "3px" }}>Buscar</p>
+        <SearchIcon sx={{
+          height:"25px",
+          width:"25px"
+        }} />
+        <Typography sx={{ paddingLeft: "3px",
+          display:{xs:"none", sm:"block"}
+         }}>Buscar</Typography>
       </Button>
     </Box>
   );

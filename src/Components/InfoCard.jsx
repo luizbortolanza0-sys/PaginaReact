@@ -1,6 +1,8 @@
 import { Card, Box, Typography } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import Delete from "./Delete.jsx";
+import CropSquareIcon from '@mui/icons-material/CropSquare';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 export const InfoCard = ({
   descricao,
@@ -19,83 +21,95 @@ export const InfoCard = ({
       sx={{
         width: "100%",
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: { xs: "column", md: "row" },
+        flexWrap: { xs: "wrap", md: "nowrap" },
         alignItems: "center",
-        height: "55px",
-        fontSize: "14px",
+        justifyContent:"center",
+        height: { xs: "175px", md: "55px" },
         backgroundColor: Theme.palette.primary.main,
         color: Theme.palette.secundary.contrastText,
       }}
     >
-      <Typography
-        sx={{
-          paddingLeft: "20px",
-          fontSize: "14px",
-        }}
-      >
-        {descricao}
-      </Typography>
+
 
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: {
+            xs: "column", md: "row"
+          },
           alignItems: "center",
-          justifyContent: "space-between",
-          paddingRight: "25px",
-          width: "70%",
+          justifyContent: { xs: "center", md: "space-between" },
+          width: "90%",
+          height:"100%",
+          gap:"25px"
         }}
       >
-        <Typography
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            fontSize: "14px",
-            width: "1px",
-            height: "1px",
-            overflow: "visible",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            color: tipo
-              ? Theme.palette.primary.light
-              : Theme.palette.primary.negative,
-          }}
+        <Box
+          display={"flex"}
+          flexDirection={{xs:"column", md:"row"}}
+          alignItems={{xs:"flex-start", md:"center"}}
+          justifyContent={"space-between"}
+          width={"100%"}
         >
-          R$ {preco}
-        </Typography>
-        <Typography
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent:"center",
-            fontSize: "14px",
-            width: "1px",
-            height: "1px",
-            paddingLeft:"100px",
-            overflow: "visible",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
+          <Typography
+            sx={{
+              fontSize: "14px",
+            }}
+          >
+            {descricao}
+          </Typography>
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "14px",
+              overflow: "visible",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              color: tipo
+                ? Theme.palette.primary.light
+                : Theme.palette.primary.negative,
+            }}
+          >
+            R$ {preco}
+          </Typography>
+        </Box>
+        <Box
+          width={"100%"}
+          display={"flex"}
+          flexDirection={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
         >
-          {categoria}
-        </Typography>
-        <Typography
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            fontSize: "14px",
-            width: "1px",
-            height: "1px",
-            overflow: "visible",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {data}
-        </Typography>
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "14px",
 
-        <Delete setGatilho={setGatilho} id={id} />
+              overflow: "visible",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {categoria}
+          </Typography>
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "14px",
+              overflow: "visible",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {data}
+          </Typography>
+          <Delete setGatilho={setGatilho} id={id} />
+        </Box>
       </Box>
     </Card>
   );
