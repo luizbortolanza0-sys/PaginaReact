@@ -17,7 +17,6 @@ export const InfoBox = ({lista, page, onChange, setGatilho}) => {
     >
       <ItemMap lista={lista.transacoes} setGatilho={setGatilho} ></ItemMap>
 
-
       <Pagination
         shape="rounded"
         page={page}

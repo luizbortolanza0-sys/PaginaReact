@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { SearchBar } from "../Components/SearchBar.jsx";
 import { InfoBox } from "../Components/InfoBox.jsx";
@@ -12,11 +12,9 @@ const MaxPerPagina = 10;
 const startFetch = await getTransacoes(1, 1, localStorage.getItem("token"))
 
 function Home() {
-  
+
   const [page, setPage] = useState(1);
-  const [texto, setTexto] = useState("");
   const [gatilho, setGatilho] = useState(false);
-  
   useEffect(() => {
     async function fetchApi() {
       setGatilho(false);
@@ -25,20 +23,31 @@ function Home() {
       setTransacoes(transTotal);
       setLista(transTotal);
       setSearch(trans);
-      
     }
     fetchApi();
-  
-  },[page, gatilho]);
+
+  }, [page, gatilho]);
 
   const [transacoes, setTransacoes] = useState(startFetch);
   const [search, setSearch] = useState(transacoes);
   const [lista, setLista] = useState(transacoes);
-  
+  const [lastData, setLastData] = useState({
+    lastEntrada:"teste",
+    lastSaida:"teste",
+    lastTotal:"teste"
+  })
 
-  const changePage = (event, value)=>{
+
+  const changePage = (event, value) => {
     setPage(value);
   }
+
+  
+
+  const mostRecent = (date1, date2) => {
+    return date1.getTime() > date2.getTime();
+  }
+
 
   function searchGet(text) {
     if (text.trim() === "") {
@@ -83,25 +92,42 @@ function Home() {
           sx={{
             display: "flex",
             alignItems: "center",
+            overflow: "visible",
             position: "relative",
             justifyContent: "flex-start",
             flexDirection: "column",
-            width: "80%",
+            width: { xs: "90%", md: "80%" },
             top: "4rem",
           }}
         >
-          <UpperHeader setGatilho={setGatilho}/>
-          <InformacoesSaldo lista={lista.resumo} />
+          <UpperHeader setGatilho={setGatilho} />
+          <InformacoesSaldo lista={lista.resumo} ultimaTransacao={lastData} />
         </Stack>
       </Stack>
 
       <Stack
+        gap={2}
         sx={{
-          width: "80%",
+          width: { xs: "90%", md: "80%" },
           position: "relative",
           top: "100px",
+
         }}
       >
+        <Box
+          width={"100%"}
+          display={{ xs: "flex", md: "none" }}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Typography
+            color={Theme.palette.primary.contrastText}
+          >Transacoes</Typography>
+          <Typography
+            variant="caption"
+            color={Theme.palette.secundary.contrastText}
+          >{lista.paginacao.total} itens</Typography>
+        </Box>
         <SearchBar
           onClick={(data) => searchGet(data)}
         />

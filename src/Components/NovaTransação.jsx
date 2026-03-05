@@ -77,7 +77,7 @@ export const NovaTransacao = ({ setGatilho }) => {
             sx: {
               display:"flex",
               alignItems:"center",
-              justifyContent:{xs:"flex-end", sm:"center"},
+              justifyContent:{xs:"flex-end", md:"center"},
               backgroundColor: "transparent",
               boxShadow: "none",
               borderRadius: "10px",
@@ -90,7 +90,7 @@ export const NovaTransacao = ({ setGatilho }) => {
             position:"relative",
             display: "flex",
             flexDirection: "column",
-            width:{xs:"100%", sm:"40%"},
+            width:{xs:"100%", md:"40%"},
             height: {xs:"58%", md:"70%"},
             alignItems: "center",
             color: Theme.palette.primary.contrastText,

@@ -7,13 +7,13 @@ export const Theme = createTheme({
       light: "#18926E",
       negative: "#E52E4D",
       dark: "#015F43",
-      contrastText: "#F5F5F5",
+      contrastText: "#E1e1e6",
     },
     secundary: {
       main: "#148563ff",
       light:"#44444cff",
       dark: "#1d1d20ff",
-      contrastText: "#b1b1b1b9",
+      contrastText: "#C4C4CC",
       negative: "#db1f3eff",
     },
     background: {

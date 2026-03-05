@@ -1,14 +1,13 @@
-import { Box, Card } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { Theme } from "../themes/theme.js";
 
 
-export const InformacoesSaldo = ({ lista }) => {
-  
+export const InformacoesSaldo = ({ lista, ultimaTransacao }) => {
 
-  function CardSaldos({ info, name, Icon, color }) {
+  function CardSaldos({ info, name, Icon, color, data }) {
     let bgcolor = Theme.palette.primary.main;
     if (name == "Total") bgcolor = Theme.palette.primary.dark;
 
@@ -17,8 +16,9 @@ export const InformacoesSaldo = ({ lista }) => {
         sx={{
           display: "flex",
           flexDirection: "row",
-          width: "32%",
-          height: "65%",
+          width: {xs:"250px", md:"32%" },
+          height: {xs:"150px", md:"65%" },
+          flexShrink:"0",
           justifyContent: "space-around",
           backgroundColor: bgcolor,
           color: Theme.palette.primary.contrastText,
@@ -53,6 +53,7 @@ export const InformacoesSaldo = ({ lista }) => {
               maximumFractionDigits: 2,
             })}
           </p>
+          <Typography display={{xs:"block", md:'none'}}>{data}</Typography>
         </Box>
         <Icon
           sx={{
@@ -72,24 +73,28 @@ export const InformacoesSaldo = ({ lista }) => {
         width: "100%",
         height: "180px",
         justifyContent: "space-between",
-        overflow: "auto",
+        overflowX:{xs:"scroll", md:'auto'},
+        gap:"20px",
+        scrollbarWidth: "none"
       }}
     >
       <CardSaldos
-        info={lista.entradas
-}
+        info={lista.entradas}
         name="Entradas"
+        data={ultimaTransacao.lastEntrada}
         color={Theme.palette.primary.light}
         Icon={ArrowCircleUpIcon}
       />
       <CardSaldos
         info={lista.saidas}
         name="Saidas"
+        data={ultimaTransacao.lastSaida}
         color={Theme.palette.primary.negative}
         Icon={ArrowCircleDownIcon}
       />
       <CardSaldos
         info={lista.total}
+        data={ultimaTransacao.lastTotal}
         name="Total"
         color={Theme.palette.primary.contrastText}
         Icon={AttachMoneyIcon}
