@@ -6,8 +6,13 @@ import { Theme } from "../themes/theme.js";
 
 
 export const InformacoesSaldo = ({ lista, ultimaTransacao }) => {
+  const meses = [
+  "Janeiro", "Fevereiro", "Março", "Abril", 
+  "Maio", "Junho", "Julho", "Agosto", 
+  "Setembro", "Outubro", "Novembro", "Dezembro"
+  ];
 
-  function CardSaldos({ info, name, Icon, color, data }) {
+  function CardSaldos({ info, name, Icon, color, data, tipo }) {
     let bgcolor = Theme.palette.primary.main;
     if (name == "Total") bgcolor = Theme.palette.primary.dark;
 
@@ -16,7 +21,7 @@ export const InformacoesSaldo = ({ lista, ultimaTransacao }) => {
         sx={{
           display: "flex",
           flexDirection: "row",
-          width: {xs:"250px", md:"32%" },
+          width: {xs:"280px", md:"32%" },
           height: {xs:"150px", md:"65%" },
           flexShrink:"0",
           justifyContent: "space-around",
@@ -53,7 +58,7 @@ export const InformacoesSaldo = ({ lista, ultimaTransacao }) => {
               maximumFractionDigits: 2,
             })}
           </p>
-          <Typography display={{xs:"block", md:'none'}}>{data}</Typography>
+          <Typography variant={"caption"} color={Theme.palette.secundary.contrastText} display={{xs:"block", md:'none'}}>Ultima {tipo} em {new Date(data).getDate()} de {meses[new Date(data).getMonth()]}</Typography>
         </Box>
         <Icon
           sx={{
@@ -81,6 +86,7 @@ export const InformacoesSaldo = ({ lista, ultimaTransacao }) => {
       <CardSaldos
         info={lista.entradas}
         name="Entradas"
+        tipo={"entrada"}
         data={ultimaTransacao.lastEntrada}
         color={Theme.palette.primary.light}
         Icon={ArrowCircleUpIcon}
@@ -88,12 +94,14 @@ export const InformacoesSaldo = ({ lista, ultimaTransacao }) => {
       <CardSaldos
         info={lista.saidas}
         name="Saidas"
+        tipo={"saida"}
         data={ultimaTransacao.lastSaida}
         color={Theme.palette.primary.negative}
         Icon={ArrowCircleDownIcon}
       />
       <CardSaldos
         info={lista.total}
+        tipo={"transação"}
         data={ultimaTransacao.lastTotal}
         name="Total"
         color={Theme.palette.primary.contrastText}

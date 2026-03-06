@@ -6,6 +6,7 @@ import { UpperHeader } from "../Components/UpperHeader.jsx";
 import { InformacoesSaldo } from "../Components/InformacoesSaldo.jsx";
 import { useEffect, useState } from "react";
 import { getTransacoes } from "../service/get/getTransacoes.js";
+import { lastDate } from "../functions/lastDate.js";
 
 
 const MaxPerPagina = 10;
@@ -23,6 +24,7 @@ function Home() {
       setTransacoes(transTotal);
       setLista(transTotal);
       setSearch(trans);
+      setLastData(lastDate(transTotal.transacoes))
     }
     fetchApi();
 
@@ -31,11 +33,7 @@ function Home() {
   const [transacoes, setTransacoes] = useState(startFetch);
   const [search, setSearch] = useState(transacoes);
   const [lista, setLista] = useState(transacoes);
-  const [lastData, setLastData] = useState({
-    lastEntrada:"teste",
-    lastSaida:"teste",
-    lastTotal:"teste"
-  })
+  const [lastData, setLastData] = useState({})
 
 
   const changePage = (event, value) => {

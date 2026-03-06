@@ -1,57 +1,18 @@
 import { Box, Button, Card, Checkbox } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { TextBox } from "../Components/TextBox";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { postCriarConta } from "../service/post/postCriarConta.js";
-import { useForm } from "react-hook-form";
 import Alerta from "../Components/Alerta.jsx";
+import { useCadastro } from "../hooks/useCadastro.js";
 
 export default function Cadastro() {
   
-  const {control, handleSubmit, watch} = useForm();
-  const [senha, setSenha] = useState("password");
-  const [confirmacaoSenha, setConfirmacaoSenha] = useState([]);
-  const [alerta, setAlert] = useState(false);
-  const [mensagem, setMensagem] = useState("");
-  const [tipoMensagem, setTipoMensagem] = useState("");
-  const navigate = useNavigate();
-
-  async function handleCadastro(data) {
-    if (data.senha !== data.senhaConfirmada) {
-      setMensagem("As duas senhas nao estao iguais!");
-      setAlert(true);
-      setTipoMensagem("error");
-      return;
-    }
-    const response = await postCriarConta({
-      login: data.login,
-      senha: data.senha
-    });
-    
-    const msg = response.mensagem == undefined ? response.data.erro : response.mensagem
-    setMensagem(msg);
-    setAlert(true);
-    if (response.status == 400) {
-      setTipoMensagem("error");
-      return;
-    }
-    setTipoMensagem("success");
-    setTimeout(() => {
-      navigate("/");
-    }, 700);
-  }
-
-  function handleChange() {
-    let aux = senha;
-    if (aux == "password") {
-      setSenha("text");
-      return;
-    }
-    if (aux == "text") {
-      setSenha("password");
-    }
-  }
+  const {form,
+        senha,
+        alerta,
+        mensagem,
+        tipoMensagem,
+        handleCadastro,
+        handleChange,} = useCadastro();
 
   return (
     <Box
@@ -78,7 +39,7 @@ export default function Cadastro() {
       >
         <Box
           component={"form"}
-          onSubmit={handleSubmit((data)=> handleCadastro(data))}
+          onSubmit={form.handleSubmit((data)=> handleCadastro(data))}
           sx={{
             display: "flex",
             alignItems: "flex-start",
@@ -101,19 +62,19 @@ export default function Cadastro() {
             <TextBox
               label={"Nome de Usuario"}
               name={"login"}
-              control={control}
+              control={form.control}
             />
             <TextBox
               type={senha}
               label={"Senha"}
               name={"senha"}
-              control={control}
+              control={form.control}
             />
             <TextBox
               type={senha}
               label={"Confirmar senha"}
               name={"senhaConfirmada"}
-              control={control}
+              control={form.control}
             />
             <Box
               sx={{

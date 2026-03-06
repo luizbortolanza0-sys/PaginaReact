@@ -1,52 +1,21 @@
 import { Box, Button, Card, Checkbox, Typography } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { TextBox } from "../Components/TextBox";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { postLogin } from "../service/post/postLogin.js";
-import { useForm } from "react-hook-form"
+import { useLogin } from "../hooks/useLogin.js";
 import Alerta from "../Components/Alerta.jsx";
+
 
 export default function Login() {
 
-  const { handleSubmit, watch, control } = useForm();
-  const [senha, setSenha] = useState("password");
-  const [alerta, setAlert] = useState(false);
-  const [mensagem, setMensagem] = useState("");
-  const [tipoMensagem, setTipoMensagem] = useState("");
-  const navigate = useNavigate();
-
-  async function handleLogin(data) {
-    const response = await postLogin(data);
-    let msg = response.data.erro ?? response.data.mensagem;
-    setMensagem(msg);
-    setAlert(true);
-    if (msg == response.data.erro) {
-      setTipoMensagem("error");
-      return;
-    }
-    setTipoMensagem("success");
-    setTimeout(() => {
-      navigate("/home");
-      window.location.reload();
-    }, 700);
-  }
-
-  function onClickCadastrar() {
-    navigate("/cadastro");
-  }
-
-  function handleChange() {
-    let aux = senha;
-    if (aux == "password") {
-      setSenha("text");
-      return;
-    }
-    if (aux == "text") {
-      setSenha("password");
-    }
-  }
-
+  const {form,
+        senha,
+        alerta,
+        mensagem,
+        tipoMensagem,
+        onClickCadastrar,
+        handleChange,
+        handleLogin} = useLogin()
+  
   return (
     <Box
       sx={{
@@ -72,7 +41,7 @@ export default function Login() {
       >
         <Box
           component={"form"}
-          onSubmit={handleSubmit((data) => handleLogin(data))}
+          onSubmit={form.handleSubmit((data) => handleLogin(data))}
           sx={{
             display: "flex",
             alignItems: "flex-start",
@@ -95,13 +64,13 @@ export default function Login() {
             <TextBox
               label={"Nome de Usuario"}
               name={"login"}
-              control={control}
+              control={form.control}
             />
             <TextBox
               type={senha}
               label={"Senha"}
               name={"senha"}
-              control={control}
+              control={form.control}
             />
             <Box
               sx={{

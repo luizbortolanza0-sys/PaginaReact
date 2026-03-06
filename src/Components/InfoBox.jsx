@@ -7,7 +7,6 @@ export const InfoBox = ({lista, page, onChange, setGatilho}) => {
   return (
     <Box
       sx={{
-        paddingTop: "25px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

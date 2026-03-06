@@ -37,7 +37,7 @@ export const InfoCard = ({
           },
           alignItems: "center",
           justifyContent: { xs: "center", md: "space-between" },
-          width: {xs:'85%', md:"90%"},
+          width: {xs:'85%', md:"95%"},
           height:"100%",
           gap:"12px"
         }}

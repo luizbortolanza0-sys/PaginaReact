@@ -4,7 +4,7 @@ import { TextBox } from "./TextBox";
 import { Theme } from "../themes/theme";
 import { useForm } from "react-hook-form"
 
-export const SearchBar = ({onChange, onClick}) => {
+export const SearchBar = ({onClick}) => {
   
   const {handleSubmit, control, watch} = useForm();
 
@@ -34,7 +34,7 @@ export const SearchBar = ({onChange, onClick}) => {
         size="medium"
         disableElevation={true}
         sx={{
-          backgroundColor: Theme.palette.background.header,
+          backgroundColor: Theme.palette.background.body,
           border: "1px solid" + Theme.palette.primary.dark,
           color: Theme.palette.primary.dark,
           fontSize: "14px",
