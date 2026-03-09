@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form"
 
 export const SearchBar = ({onClick}) => {
   
-  const {handleSubmit, control, watch} = useForm();
+  const {handleSubmit, control} = useForm();
 
   return (
     <Box

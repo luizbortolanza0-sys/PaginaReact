@@ -5,6 +5,7 @@ import { Theme } from "../themes/theme.js";
 import { useState } from "react";
 
 function Buttons({ type, cor, Icon, onClick}) {
+  
   const [focus, setFocus] = useState(false);
   let auxCor;
 

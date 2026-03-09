@@ -102,7 +102,7 @@ export const NovaTransacao = ({ setGatilho }) => {
             component={"form"}
             onSubmit={handleSubmit((data)=>{
                 cadastrar(data);
-                setGatilho(true);
+                setGatilho(prev=>!prev);
             })}
             sx={{
               display: "flex",

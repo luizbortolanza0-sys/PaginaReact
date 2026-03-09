@@ -4,6 +4,7 @@ import logo from "../img/logo.png";
 import { Theme } from "../themes/theme.js";
 
 export const UpperHeader = ({setGatilho}) => {
+  
   function NomeEmpresa() {
     return <h1 style={{ fontSize: "20px", fontStyle: "normal" }}>Finance</h1>;
   }

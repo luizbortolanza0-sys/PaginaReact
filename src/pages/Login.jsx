@@ -12,11 +12,13 @@ export default function Login() {
         alerta,
         mensagem,
         tipoMensagem,
+        setAlert,
         onClickCadastrar,
         handleChange,
-        handleLogin} = useLogin()
-  
+        handleLogin} = useLogin();
+
   return (
+    
     <Box
       sx={{
         display: "flex",

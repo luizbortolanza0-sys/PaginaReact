@@ -4,62 +4,31 @@ import { SearchBar } from "../Components/SearchBar.jsx";
 import { InfoBox } from "../Components/InfoBox.jsx";
 import { UpperHeader } from "../Components/UpperHeader.jsx";
 import { InformacoesSaldo } from "../Components/InformacoesSaldo.jsx";
-import { useEffect, useState } from "react";
-import { getTransacoes } from "../service/get/getTransacoes.js";
-import { lastDate } from "../functions/lastDate.js";
+import useHome from "../hooks/useHome.js";
 
 
 const MaxPerPagina = 10;
-const startFetch = await getTransacoes(1, 1, localStorage.getItem("token"))
 
 function Home() {
 
-  const [page, setPage] = useState(1);
-  const [gatilho, setGatilho] = useState(false);
-  useEffect(() => {
-    async function fetchApi() {
-      setGatilho(false);
-      let trans = await getTransacoes(page, MaxPerPagina, localStorage.getItem("token"));
-      let transTotal = await getTransacoes(1, trans.paginacao.total, localStorage.getItem("token"));
-      setTransacoes(transTotal);
-      setLista(transTotal);
-      setSearch(trans);
-      setLastData(lastDate(transTotal.transacoes))
-    }
-    fetchApi();
+  const {
+    page,
+    search,
+    lista,
+    lastData,
+    setGatilho,
+    searchGet,
+    changePage
+  } = useHome(MaxPerPagina);
 
-  }, [page, gatilho]);
-
-  const [transacoes, setTransacoes] = useState(startFetch);
-  const [search, setSearch] = useState(transacoes);
-  const [lista, setLista] = useState(transacoes);
-  const [lastData, setLastData] = useState({})
-
-
-  const changePage = (event, value) => {
-    setPage(value);
-  }
-
-  
-
-  const mostRecent = (date1, date2) => {
-    return date1.getTime() > date2.getTime();
-  }
-
-
-  function searchGet(text) {
-    if (text.trim() === "") {
-      setGatilho(true);
-      return;
-    }
-
-    setSearch({
-      ...search,
-      transacoes: lista.transacoes.filter((item) =>
-        item.nome.toLowerCase().includes(text.toLowerCase()),
-      ),
-    }
-    );
+  if (!lista) {
+    return <Box
+      width={"100%"}
+      height={"100vh"}
+      display={"flex"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      color={Theme.palette.primary.contrastText}>Carregando...</Box>
   }
 
   return (
@@ -99,7 +68,7 @@ function Home() {
           }}
         >
           <UpperHeader setGatilho={setGatilho} />
-          <InformacoesSaldo lista={lista.resumo} ultimaTransacao={lastData} />
+          <InformacoesSaldo lista={lista?.resumo} ultimaTransacao={lastData} />
         </Stack>
       </Stack>
 
@@ -136,4 +105,3 @@ function Home() {
 }
 
 export default Home;
-

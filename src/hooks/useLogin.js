@@ -24,7 +24,6 @@ export const useLogin = () => {
         setTipoMensagem("success");
         setTimeout(() => {
             navigate("/home");
-            window.location.reload();
         }, 700);
     }
 
@@ -49,6 +48,7 @@ export const useLogin = () => {
         alerta,
         mensagem,
         tipoMensagem,
+        setAlert,
         onClickCadastrar,
         handleChange,
         handleLogin
