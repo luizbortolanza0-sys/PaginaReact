@@ -1,5 +1,13 @@
 
-const mostRecent = (data1, data2) => (new Date(data1).getTime()) > (new Date(data2).getTime()) ? data1 : data2;
+const mostRecent = (data1, data2) => {
+    if(data1 && !data2){
+        return data1
+    }
+    if(!data1 && data2){
+        return data2; 
+    }
+    return (new Date(data1).getTime()) > (new Date(data2).getTime()) ? data1 : data2
+};
 
 
 export const lastDate = (lista)=>{

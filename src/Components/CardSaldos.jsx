@@ -2,11 +2,11 @@ import { Card, Typography, Box } from '@mui/material'
 import { Theme } from "../themes/theme.js";
 
 export default function CardSaldos({ info, name, Icon, color, data, tipo }) {
-    
+
     let bgcolor = Theme.palette.primary.main;
 
     if (name == "Total") bgcolor = Theme.palette.primary.dark;
-    
+
     const meses = [
         "Janeiro", "Fevereiro", "Março", "Abril",
         "Maio", "Junho", "Julho", "Agosto",
@@ -55,7 +55,11 @@ export default function CardSaldos({ info, name, Icon, color, data, tipo }) {
                         maximumFractionDigits: 2,
                     })}
                 </p>
-                <Typography variant={"caption"} color={Theme.palette.secundary.contrastText} display={{ xs: "block", md: 'none' }}>Ultima {tipo} em {new Date(data).getDate()} de {meses[new Date(data).getMonth()]}</Typography>
+                <Typography
+                    variant={"caption"}
+                    color={Theme.palette.secundary.contrastText}
+                    display={{ xs: "block", md: 'none' }}>
+                    {data ? `Ultima ${tipo} em ${new Date(data).getDate()} de ${meses[new Date(data).getMonth()]}`: `Nenhuma Transação do tipo`}</Typography>
             </Box>
             <Icon
                 sx={{

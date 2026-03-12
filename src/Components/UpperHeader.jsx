@@ -3,7 +3,7 @@ import { NovaTransacao } from "../Components/NovaTransação.jsx";
 import logo from "../img/logo.png";
 import { Theme } from "../themes/theme.js";
 
-export const UpperHeader = ({setGatilho}) => {
+export const UpperHeader = () => {
   
   function NomeEmpresa() {
     return <h1 style={{ fontSize: "20px", fontStyle: "normal" }}>Finance</h1>;
@@ -45,7 +45,7 @@ export const UpperHeader = ({setGatilho}) => {
         <Logo />
         <NomeEmpresa />
       </Box>
-      <NovaTransacao setGatilho={setGatilho} />
+      <NovaTransacao />
     </Box>
   );
 };

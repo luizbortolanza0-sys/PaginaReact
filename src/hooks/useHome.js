@@ -18,7 +18,6 @@ const useHome = (MaxPerPagina) => {
             setSearch(trans);
             setLastData(lastDate(transTotal.transacoes));
         }
-
         fetchApi();
     }, [page, gatilho]);
 
@@ -32,7 +31,7 @@ const useHome = (MaxPerPagina) => {
     function searchGet(text) {
 
         if (!text || text.trim() === "") {
-            setGatilho(true);
+            setGatilho(prev=> !prev);
             return;
         }
 

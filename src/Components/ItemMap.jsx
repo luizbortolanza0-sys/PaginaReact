@@ -1,15 +1,20 @@
 import { Theme } from "../themes/theme";
 import { InfoCard } from "./InfoCard";
+import { useContext } from "react";
+import { HomeContext } from "../pages/Home.jsx";
 
-export function ItemMap({ lista, setGatilho }) {
 
-  if(lista == ""){
+export function ItemMap() {
+
+  const {search, setGatilho} = useContext(HomeContext);
+
+  if(search.transacoes == ""){
     return(<p style={{
       color:Theme.palette.primary.contrastText
     }}>Nenhuma transação encontrada!</p>);
   }
   
-  return lista.map((item) => {
+  return search.transacoes.map((item) => {
     const auxBooleanoParaTipo = item.tipo === "entrada";
 
     return (

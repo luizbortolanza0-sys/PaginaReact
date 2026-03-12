@@ -1,52 +1,28 @@
 import { Button, Card, Dialog, Box } from "@mui/material";
 import { TextBox } from "./TextBox.jsx";
 import { Theme } from "../themes/theme.js";
-import { useState } from "react";
+import { useContext } from "react";
+import { useNovaTransacao } from "../hooks/useNovaTransacao.js";
 import CloseIcon from '@mui/icons-material/Close';
 import { ButtonType } from "./ButtonType.jsx";
-import { postCriarTransacao } from "../service/post/postCriarTransacao.js";
-import { useForm } from "react-hook-form";
 import Alerta from "./Alerta.jsx";
+import { HomeContext } from "../pages/Home.jsx";
 
-export const NovaTransacao = ({ setGatilho }) => {
+export const NovaTransacao = () => {
 
-  const { control, handleSubmit, setValue, reset } = useForm();
-  const [open, setOpen] = useState(false);
-  setValue("tipo", "entrada");
-  const [alerta, setAlert] = useState(false);
-  const [mensagem, setMensagem] = useState("");
-  const [tipoMensagem, setTipoMensagem] = useState("");
-
-  function clickOpen() {
-    setOpen(true);
-  }
-  function clickClose() {
-    setOpen(false);
-  }
-
-  async function cadastrar(data) {
-
-    if (data.nome == undefined || data.valor == undefined || data.categoria == undefined) {
-      setMensagem("Informações Faltando");
-      setTipoMensagem("error");
-      setAlert(true);
-      return;
-    }
-
-    const response = await postCriarTransacao(
-      data,
-      localStorage.getItem("token"),
-    );
-    const msg = response.mensagem ?? response.erro 
-    setMensagem(msg);
-    setAlert(true);
-    if(msg == response.erro){
-      setTipoMensagem("error");
-      return;
-    }
-    setTipoMensagem("success");
-    reset();
-  }
+  const {
+    control,
+    open,
+    alerta,
+    mensagem,
+    tipoMensagem,
+    setValue,
+    clickClose,
+    clickOpen,
+    handleSubmit,
+    cadastrar
+  } = useNovaTransacao();
+  const { setGatilho } = useContext(HomeContext);
 
   return (
     <Box
@@ -58,9 +34,9 @@ export const NovaTransacao = ({ setGatilho }) => {
         sx={{
           backgroundColor: Theme.palette.secundary.main,
           color: Theme.palette.primary.contrastText,
-          py:"7px",
-          px:"10px",
-          fontSize: {xs:'10.5px', sm :"14px"},
+          py: "7px",
+          px: "10px",
+          fontSize: { xs: '10.5px', sm: "14px" },
           textTransform: "none",
           "&:hover": {
             backgroundColor: Theme.palette.primary.light,
@@ -75,9 +51,9 @@ export const NovaTransacao = ({ setGatilho }) => {
         slotProps={{
           paper: {
             sx: {
-              display:"flex",
-              alignItems:"center",
-              justifyContent:{xs:"flex-end", md:"center"},
+              display: "flex",
+              alignItems: "center",
+              justifyContent: { xs: "flex-end", md: "center" },
               backgroundColor: "transparent",
               boxShadow: "none",
               borderRadius: "10px",
@@ -87,22 +63,22 @@ export const NovaTransacao = ({ setGatilho }) => {
       >
         <Card
           sx={{
-            position:"relative",
+            position: "relative",
             display: "flex",
             flexDirection: "column",
-            width:{xs:"100%", md:"40%"},
-            height: {xs:"58%", md:"70%"},
+            width: { xs: "100%", md: "40%" },
+            height: { xs: "58%", md: "70%" },
             alignItems: "center",
             color: Theme.palette.primary.contrastText,
             backgroundColor: Theme.palette.background.body,
           }}
         >
-          
+
           <Box
             component={"form"}
-            onSubmit={handleSubmit((data)=>{
-                cadastrar(data);
-                setGatilho(prev=>!prev);
+            onSubmit={handleSubmit((data) => {
+              cadastrar(data);
+              setGatilho(prev => !prev);
             })}
             sx={{
               display: "flex",
@@ -175,7 +151,7 @@ export const NovaTransacao = ({ setGatilho }) => {
               top: "18px",
             }}
           >
-            <CloseIcon/>
+            <CloseIcon />
           </Button>
           <Alerta
             mensagem={mensagem}

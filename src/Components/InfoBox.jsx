@@ -1,9 +1,13 @@
 import { Box, Pagination } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { ItemMap } from "./ItemMap.jsx";
+import { useContext } from "react";
+import { HomeContext } from "../pages/Home.jsx";
 
-export const InfoBox = ({lista, page, onChange, setGatilho}) => {
+export const InfoBox = () => {
 
+  const {changePage, page , search } = useContext(HomeContext);
+  
   return (
     <Box
       sx={{
@@ -14,13 +18,13 @@ export const InfoBox = ({lista, page, onChange, setGatilho}) => {
         gap: "10px",
       }}
     >
-      <ItemMap lista={lista.transacoes} setGatilho={setGatilho} ></ItemMap>
+      <ItemMap></ItemMap>
 
       <Pagination
         shape="rounded"
         page={page}
-        onChange={onChange}
-        count={lista.paginacao.totalPaginas}
+        onChange={changePage}
+        count={search.paginacao.totalPaginas}
         sx={{
           paddingTop: "20px",
           "& .MuiPaginationItem-root.Mui-selected": {
