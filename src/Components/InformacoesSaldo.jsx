@@ -16,7 +16,7 @@ export const InformacoesSaldo = () => {
         display: "flex",
         width: "100%",
         height: {xs:"150px", md:"190px"},
-        borderRadius:{xs:"0px 15px 15px 0px", md:'0px'},
+        borderRadius:{xs:"0px 8px 8px 0px", md:'0px'},
         justifyContent: "space-between",
         overflowX:{xs:"scroll", md:'auto'},
         gap:"20px",
