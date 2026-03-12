@@ -22,8 +22,7 @@ const useHome = (MaxPerPagina) => {
     }, [page, gatilho]);
 
 
-    const changePage = (event, value) => {
-
+    const changePage = ( _ ,value) => {
         setPage(value);
     }
 
