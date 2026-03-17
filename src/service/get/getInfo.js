@@ -1,6 +1,6 @@
 import { api } from "../api";
 
-export async function postCriarConta() {
+export async function getInfo() {
   try {
     const response = await api.get("/");
     return response.data;

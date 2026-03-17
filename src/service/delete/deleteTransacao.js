@@ -1,15 +1,8 @@
 import { api } from "../api";
 
-export async function deleteTransacao(id, token) {
+export async function deleteTransacao(id) {
   try {
-    const response = await api.delete(
-      `/api/transacoes/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
+    const response = await api.delete(`/api/transacoes/${id}`);
     return response.data;
   } catch (error) {
     return error.response.data;

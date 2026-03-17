@@ -6,7 +6,13 @@ const api = axios.create({
   timeout: 1000,
 });
 
-
+api.interceptors.request.use(config => {
+  const authToken = localStorage.getItem("token");
+  if (authToken) {
+    config.headers.Authorization = `Bearer ${authToken}`;
+  }
+  return config;
+});
 
 api.interceptors.response.use(
   (response) => response,
@@ -27,8 +33,7 @@ api.interceptors.response.use(
           localStorage.setItem("refreshToken", newToken.refreshToken);
           localStorage.setItem("token", newToken.token);
         }
-        
-        
+                
         originalRequest.headers.Authorization = `Bearer ${newToken.token}`;
         return api(originalRequest);
       } catch (err) {

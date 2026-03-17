@@ -28,10 +28,7 @@ export const useNovaTransacao = () => {
             return;
         }
 
-        const response = await postCriarTransacao(
-            data,
-            localStorage.getItem("token"),
-        );
+        const response = await postCriarTransacao( data);
         const msg = response.mensagem ?? response.erro
         setMensagem(msg);
         setAlert(true);

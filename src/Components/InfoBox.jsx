@@ -1,12 +1,11 @@
 import { Box, Pagination } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { ItemMap } from "./ItemMap.jsx";
-import { useContext } from "react";
-import { HomeContext } from "../pages/Home.jsx";
+import { useHomeContext } from "../hooks/useHomeContext.js";
 
 export const InfoBox = () => {
 
-  const {changePage, page , search } = useContext(HomeContext);
+  const {changePage, page , search } = useHomeContext();
   
   return (
     <Box

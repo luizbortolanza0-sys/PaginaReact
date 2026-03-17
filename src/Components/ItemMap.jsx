@@ -1,12 +1,10 @@
 import { Theme } from "../themes/theme";
 import { InfoCard } from "./InfoCard";
-import { useContext } from "react";
-import { HomeContext } from "../pages/Home.jsx";
-
+import { useHomeContext } from "../hooks/useHomeContext.js";
 
 export function ItemMap() {
 
-  const {search, setGatilho} = useContext(HomeContext);
+  const {search, setGatilho} = useHomeContext();
 
   if(search.transacoes == ""){
     return(<p style={{

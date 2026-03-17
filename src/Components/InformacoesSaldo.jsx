@@ -4,12 +4,12 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { Theme } from "../themes/theme.js";
-import { useContext } from "react";
-import { HomeContext } from "../pages/Home.jsx";
+import { useHomeContext } from "../hooks/useHomeContext.js";
+
 
 
 export const InformacoesSaldo = () => {
-  const { resumo, lastData } = useContext(HomeContext);
+  const { resumo, lastData } = useHomeContext();
   return (
     <Box
       sx={{

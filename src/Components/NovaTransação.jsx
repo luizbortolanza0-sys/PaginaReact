@@ -1,12 +1,12 @@
 import { Button, Card, Dialog, Box } from "@mui/material";
 import { TextBox } from "./TextBox.jsx";
 import { Theme } from "../themes/theme.js";
-import { useContext } from "react";
 import { useNovaTransacao } from "../hooks/useNovaTransacao.js";
 import CloseIcon from '@mui/icons-material/Close';
 import { ButtonType } from "./ButtonType.jsx";
 import Alerta from "./Alerta.jsx";
-import { HomeContext } from "../pages/Home.jsx";
+import { useHomeContext } from "../hooks/useHomeContext.js";
+
 
 export const NovaTransacao = () => {
 
@@ -22,7 +22,8 @@ export const NovaTransacao = () => {
     handleSubmit,
     cadastrar
   } = useNovaTransacao();
-  const { setGatilho } = useContext(HomeContext);
+  
+  const { setGatilho } = useHomeContext();
 
   return (
     <Box

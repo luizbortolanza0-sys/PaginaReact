@@ -7,7 +7,7 @@ export const useDelete = ( id ) => {
     const [tipoMensagem, setTipoMensagem] = useState("");
 
     async function deletarTransacao() {
-        const response = await deleteTransacao(id, localStorage.getItem("token"));
+        const response = await deleteTransacao(id);
         const msg = response.mensagem ?? response.erro
         setMensagem(msg);
         setAlert(true);

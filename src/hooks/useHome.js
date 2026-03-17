@@ -2,8 +2,10 @@ import { lastDate } from "../functions/lastDate.js";
 import { useEffect, useState } from "react";
 import { getTransacoes } from "../service/get/getTransacoes.js";
 
+const MaxPerPagina = 10;
 
-const useHome = (MaxPerPagina) => {
+
+const useHome = () => {
     const [page, setPage] = useState(1);
     const [gatilho, setGatilho] = useState(false);
     const [lista, setLista] = useState(null);
@@ -12,8 +14,8 @@ const useHome = (MaxPerPagina) => {
 
     useEffect(() => {
         async function fetchApi() {
-            let trans = await getTransacoes(page, MaxPerPagina, localStorage.getItem("token"));
-            let transTotal = await getTransacoes(1, trans.paginacao.total, localStorage.getItem("token"));
+            let trans = await getTransacoes(page, MaxPerPagina);
+            let transTotal = await getTransacoes(1, trans.paginacao.total);
             setLista(transTotal);
             setSearch(trans);
             setLastData(lastDate(transTotal.transacoes));

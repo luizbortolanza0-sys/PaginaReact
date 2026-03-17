@@ -1,28 +1,19 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { createContext } from "react";
 import { Theme } from "../themes/theme.js";
 import { SearchBar } from "../Components/SearchBar.jsx";
 import { InfoBox } from "../Components/InfoBox.jsx";
 import { UpperHeader } from "../Components/UpperHeader.jsx";
 import { InformacoesSaldo } from "../Components/InformacoesSaldo.jsx";
 import useHome from "../hooks/useHome.js";
-
-
-const MaxPerPagina = 10;
-export const HomeContext = createContext();
+import { HomeProvider } from "../Context/HomeProvider.jsx";
 
 
 function Home() {
 
   const {
-        page,
-        search,
-        lista,
-        lastData,
-        setGatilho,
-        searchGet,
-        changePage
-    } = useHome(MaxPerPagina)
+    lista,
+    searchGet
+  } = useHome();
 
 
   if (!lista) {
@@ -36,8 +27,7 @@ function Home() {
   }
 
   return (
-    <HomeContext.Provider value={
-      {setGatilho, resumo: lista.resumo, lastData, page, search, changePage}}>
+    <HomeProvider>
       <Stack
         direction={"column"}
         className="containerPrincipal"
@@ -105,11 +95,11 @@ function Home() {
           <SearchBar
             onClick={(data) => searchGet(data)}
           />
-          
+
           <InfoBox />
         </Stack>
       </Stack>
-    </HomeContext.Provider>
+    </HomeProvider>
   );
 }
 
