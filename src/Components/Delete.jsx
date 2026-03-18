@@ -18,8 +18,8 @@ export default function Delete({ id, setGatilho }) {
     <Tooltip title="Delete" disableInteractive slots={{ transition: Zoom }}>
       <Button
         onClick={() => {
-          setGatilho(prev => !prev);
           deletarTransacao();
+          setGatilho(prev => !prev);
         }}
         sx={{
           minWidth: 0,

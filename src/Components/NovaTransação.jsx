@@ -16,6 +16,7 @@ export const NovaTransacao = () => {
     alerta,
     mensagem,
     tipoMensagem,
+    setAlert,
     setValue,
     clickClose,
     clickOpen,
@@ -23,7 +24,7 @@ export const NovaTransacao = () => {
     cadastrar
   } = useNovaTransacao();
   
-  const { setGatilho } = useHomeContext();
+  const { setGatilho} = useHomeContext();
 
   return (
     <Box

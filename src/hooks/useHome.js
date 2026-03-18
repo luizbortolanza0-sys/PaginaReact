@@ -24,26 +24,24 @@ const useHome = () => {
     }, [page, gatilho]);
 
 
-    const changePage = ( _ ,value) => {
+    const changePage = (_, value) => {
         setPage(value);
     }
 
 
     function searchGet(text) {
-
         if (!text || text.trim() === "") {
-            setGatilho(prev=> !prev);
+            setGatilho(prev => !prev);
             return;
         }
 
-        setSearch({
-            ...search,
-            transacoes: lista.transacoes.filter((item) =>
-                item.nome.toLowerCase().includes(text.toLowerCase()),
-            ),
-        }
-        );
+        const searchedTransaction = lista.transacoes.filter((item) => item.nome.toLowerCase().includes(text.toLowerCase()));
+        setSearch(prev => ({
+            ...prev,
+            transacoes: searchedTransaction,
+        }));
     }
+
     return {
         page,
         search,

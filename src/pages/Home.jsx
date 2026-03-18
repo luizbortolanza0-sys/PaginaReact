@@ -11,8 +11,7 @@ import { HomeProvider } from "../Context/HomeProvider.jsx";
 function Home() {
 
   const {
-    lista,
-    searchGet
+    lista
   } = useHome();
 
 
@@ -92,9 +91,7 @@ function Home() {
             >{lista.paginacao.total} itens</Typography>
           </Box>
 
-          <SearchBar
-            onClick={(data) => searchGet(data)}
-          />
+          <SearchBar />
 
           <InfoBox />
         </Stack>

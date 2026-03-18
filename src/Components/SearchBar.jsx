@@ -3,16 +3,18 @@ import SearchIcon from '@mui/icons-material/Search';
 import { TextBox } from "./TextBox";
 import { Theme } from "../themes/theme";
 import { useForm } from "react-hook-form"
+import { useHomeContext } from "../hooks/useHomeContext";
 
-export const SearchBar = ({onClick}) => {
-  
-  const {handleSubmit, control} = useForm();
+export const SearchBar = () => {
+
+  const { searchGet } = useHomeContext();
+  const { handleSubmit, control } = useForm();
 
   return (
     <Box
       component={"form"}
-      onSubmit={handleSubmit((data)=>{
-        onClick(data?.search);
+      onSubmit={handleSubmit((data) => {
+        searchGet(data.search);
       })}
       sx={{
         display: "flex",
@@ -21,11 +23,11 @@ export const SearchBar = ({onClick}) => {
         gap: "20px",
       }}
     >
-      <TextBox 
-      type={"text"}  
-      label ={"Busque uma Transação"} 
-      control ={control}
-      name={"search"}
+      <TextBox
+        type={"text"}
+        label={"Busque uma Transação"}
+        control={control}
+        name={"search"}
       />
 
       <Button
@@ -38,7 +40,7 @@ export const SearchBar = ({onClick}) => {
           border: "1px solid" + Theme.palette.primary.dark,
           color: Theme.palette.primary.dark,
           fontSize: "14px",
-          padding: {xs:"6.75px, 20px, 6.75px, 20px", sm :"6.75px 25px 6.75px 25px"},
+          padding: { xs: "6.75px, 20px, 6.75px, 20px", sm: "6.75px 25px 6.75px 25px" },
           textTransform: "none",
           "&:hover": {
             backgroundColor: Theme.palette.secundary.main,
@@ -48,12 +50,13 @@ export const SearchBar = ({onClick}) => {
         }}
       >
         <SearchIcon sx={{
-          height:"25px",
-          width:"25px"
+          height: "25px",
+          width: "25px"
         }} />
-        <Typography sx={{ paddingLeft: "3px",
-          display:{xs:"none", sm:"block"}
-         }}>Buscar</Typography>
+        <Typography sx={{
+          paddingLeft: "3px",
+          display: { xs: "none", sm: "block" }
+        }}>Buscar</Typography>
       </Button>
     </Box>
   );

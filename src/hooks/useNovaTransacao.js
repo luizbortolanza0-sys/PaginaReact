@@ -46,6 +46,7 @@ export const useNovaTransacao = () => {
         alerta,
         mensagem,
         tipoMensagem,
+        setAlert,
         setValue,
         clickClose,
         clickOpen,

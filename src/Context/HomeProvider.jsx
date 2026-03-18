@@ -11,6 +11,7 @@ export const HomeProvider = ({ children }) => {
         search,
         lastData,
         lista,
+        searchGet,
         setGatilho,
         changePage
     } = useHome();
@@ -20,7 +21,7 @@ export const HomeProvider = ({ children }) => {
     }
 
     return <HomeContext.Provider value={
-        { setGatilho, resumo: lista.resumo, lastData, page, search, changePage }}>
+        { setGatilho, searchGet,resumo: lista.resumo, lastData, page, search, changePage }}>
         {children}
     </HomeContext.Provider>
 }
