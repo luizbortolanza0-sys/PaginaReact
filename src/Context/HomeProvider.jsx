@@ -4,7 +4,7 @@ import useHome from "../hooks/useHome.js";
 export const HomeContext = createContext();
 
 
-export const HomeProvider = ({children})=>{
+export const HomeProvider = ({ children }) => {
 
     const {
         page,
@@ -15,12 +15,12 @@ export const HomeProvider = ({children})=>{
         changePage
     } = useHome();
 
-    if(!lista){
-        return<></>;
+    if (!lista) {
+        return <></>;
     }
 
     return <HomeContext.Provider value={
-      {setGatilho, resumo: lista.resumo, lastData, page, search, changePage}}>
-            {children}
-      </HomeContext.Provider>
+        { setGatilho, resumo: lista.resumo, lastData, page, search, changePage }}>
+        {children}
+    </HomeContext.Provider>
 }
