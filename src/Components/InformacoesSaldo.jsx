@@ -15,12 +15,49 @@ export const InformacoesSaldo = () => {
       sx={{
         display: "flex",
         width: "100%",
-        height: {xs:"150px", md:"190px"},
-        borderRadius:{xs:"0px 8px 8px 0px", md:'0px'},
+        height: { xs: "150px", md: "190px" },
+        borderRadius: { xs: "0px 8px 8px 0px", md: '0px' },
         justifyContent: "space-between",
-        overflowX:{xs:"scroll", md:'auto'},
-        gap:"20px",
-        scrollbarWidth: "none"
+        overflowX: { xs: "scroll", md: 'auto' },
+        gap: "20px",
+        scrollbarWidth: {xs:"thin", md:"none"},
+        scrollbarColor: "#64748b",
+        "&::-webkit-scrollbar": {
+          width: "6px",
+          height: "6px",
+        },
+
+        "&::-webkit-scrollbar-track": {
+          display:"none"
+        },
+
+        "&::-webkit-scrollbar-track:hover": {
+          display:'none',
+        },
+
+        "&::-webkit-scrollbar-track:active": {
+          display:"none",
+        },
+
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#64748b",
+          borderRadius: "3px",
+          minHeight: "40px",
+        },
+
+        "&::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: "#475569",
+        },
+
+        "&::-webkit-scrollbar-thumb:active": {
+          backgroundColor: "#334155",
+        },
+
+        "&::-webkit-scrollbar-button": {
+          display: "none",
+          width: 0,
+          height: 0,
+        },
       }}
     >
       <CardSaldos
