@@ -1,12 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import { TextBox } from "./TextBox";
 import { Theme } from "../themes/theme";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 import { useHomeContext } from "../hooks/useHomeContext";
 
 export const SearchBar = () => {
-
   const { searchGet } = useHomeContext();
   const { handleSubmit, control } = useForm();
 
@@ -40,7 +39,10 @@ export const SearchBar = () => {
           border: "1px solid" + Theme.palette.primary.dark,
           color: Theme.palette.primary.dark,
           fontSize: "14px",
-          padding: { xs: "6.75px, 20px, 6.75px, 20px", sm: "6.75px 25px 6.75px 25px" },
+          padding: {
+            xs: "6.75px, 20px, 6.75px, 20px",
+            sm: "6.75px 25px 6.75px 25px",
+          },
           textTransform: "none",
           "&:hover": {
             backgroundColor: Theme.palette.secundary.main,
@@ -49,14 +51,20 @@ export const SearchBar = () => {
           },
         }}
       >
-        <SearchIcon sx={{
-          height: "25px",
-          width: "25px"
-        }} />
-        <Typography sx={{
-          paddingLeft: "3px",
-          display: { xs: "none", sm: "block" }
-        }}>Buscar</Typography>
+        <SearchIcon
+          sx={{
+            height: "25px",
+            width: "25px",
+          }}
+        />
+        <Typography
+          sx={{
+            paddingLeft: "3px",
+            display: { xs: "none", sm: "block" },
+          }}
+        >
+          Buscar
+        </Typography>
       </Button>
     </Box>
   );

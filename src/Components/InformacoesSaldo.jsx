@@ -1,12 +1,10 @@
 import { Box } from "@mui/material";
 import CardSaldos from "./CardSaldos.jsx";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { Theme } from "../themes/theme.js";
 import { useHomeContext } from "../hooks/useHomeContext.js";
-
-
 
 export const InformacoesSaldo = () => {
   const { resumo, lastData } = useHomeContext();
@@ -16,11 +14,11 @@ export const InformacoesSaldo = () => {
         display: "flex",
         width: "100%",
         height: { xs: "150px", md: "190px" },
-        borderRadius: { xs: "0px 8px 8px 0px", md: '0px' },
+        borderRadius: { xs: "0px 8px 8px 0px", md: "0px" },
         justifyContent: "space-between",
-        overflowX: { xs: "scroll", md: 'auto' },
+        overflowX: { xs: "scroll", md: "auto" },
         gap: "20px",
-        scrollbarWidth: {xs:"thin", md:"none"},
+        scrollbarWidth: { xs: "thin", md: "none" },
         scrollbarColor: "#64748b",
         "&::-webkit-scrollbar": {
           width: "6px",
@@ -28,15 +26,15 @@ export const InformacoesSaldo = () => {
         },
 
         "&::-webkit-scrollbar-track": {
-          display:"none"
+          display: "none",
         },
 
         "&::-webkit-scrollbar-track:hover": {
-          display:'none',
+          display: "none",
         },
 
         "&::-webkit-scrollbar-track:active": {
-          display:"none",
+          display: "none",
         },
 
         "&::-webkit-scrollbar-thumb": {

@@ -1,11 +1,10 @@
-import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
-import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { Button, Box } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import { useState } from "react";
 
-function Buttons({ type, cor, Icon, onClick}) {
-  
+function Buttons({ type, cor, Icon, onClick }) {
   const [focus, setFocus] = useState(false);
   let auxCor;
 
@@ -53,18 +52,17 @@ function Buttons({ type, cor, Icon, onClick}) {
   );
 }
 
-export const ButtonType = ({onChange}) => {
-
+export const ButtonType = ({ onChange }) => {
   return (
     <>
       <Buttons
-        onClick={() => onChange("tipo","entrada")}
+        onClick={() => onChange("tipo", "entrada")}
         type={"Entrada"}
         cor={Theme.palette.secundary.main}
         Icon={ArrowCircleUpIcon}
       />
       <Buttons
-        onClick={()=> onChange("tipo", "saida")}
+        onClick={() => onChange("tipo", "saida")}
         type={"Saida"}
         cor={Theme.palette.primary.negative}
         Icon={ArrowCircleDownIcon}

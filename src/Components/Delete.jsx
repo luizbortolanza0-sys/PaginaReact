@@ -6,20 +6,15 @@ import { useDelete } from "../hooks/useDelete.js";
 import Alerta from "./Alerta.jsx";
 
 export default function Delete({ id, setGatilho }) {
-
-  const { 
-    alerta,
-    mensagem,
-    tipoMensagem,
-    setAlert,
-    deletarTransacao } = useDelete(id);
+  const { alerta, mensagem, tipoMensagem, setAlert, deletarTransacao } =
+    useDelete();
 
   return (
     <Tooltip title="Delete" disableInteractive slots={{ transition: Zoom }}>
       <Button
         onClick={() => {
-          deletarTransacao();
-          setGatilho(prev => !prev);
+          deletarTransacao(id);
+          setGatilho((prev) => !prev);
         }}
         sx={{
           minWidth: 0,

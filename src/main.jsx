@@ -7,5 +7,5 @@ import "@fontsource/roboto/400.css";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <App />
-  </BrowserRouter>
+  </BrowserRouter>,
 );

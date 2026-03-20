@@ -5,14 +5,15 @@ import Alerta from "../Components/Alerta.jsx";
 import { useCadastro } from "../hooks/useCadastro.js";
 
 export default function Cadastro() {
-  
-  const {form,
-        senha,
-        alerta,
-        mensagem,
-        tipoMensagem,
-        handleCadastro,
-        handleChange,} = useCadastro();
+  const {
+    form,
+    senha,
+    alerta,
+    mensagem,
+    tipoMensagem,
+    handleCadastro,
+    handleChange,
+  } = useCadastro();
 
   return (
     <Box
@@ -30,7 +31,7 @@ export default function Cadastro() {
         sx={{
           display: "flex",
           backgroundColor: Theme.palette.primary.main,
-          height: {xs:"40%", md:"60%"},
+          height: { xs: "40%", md: "60%" },
           width: { xs: "90%", md: "35%" },
           justifyContent: "center",
           alignItems: "center",
@@ -39,7 +40,7 @@ export default function Cadastro() {
       >
         <Box
           component={"form"}
-          onSubmit={form.handleSubmit((data)=> handleCadastro(data))}
+          onSubmit={form.handleSubmit((data) => handleCadastro(data))}
           sx={{
             display: "flex",
             alignItems: "flex-start",

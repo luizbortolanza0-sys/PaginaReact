@@ -3,7 +3,6 @@ import { Theme } from "../themes/theme.js";
 import { Controller } from "react-hook-form";
 
 export const TextBox = ({ label, name, type, control }) => {
-
   return (
     <Controller
       name={name}
@@ -11,7 +10,11 @@ export const TextBox = ({ label, name, type, control }) => {
       render={({ field }) => (
         <TextField
           {...field}
-          onChange={(e) => field.onChange(type === "number" ? Number(e.target.value) : e.target.value)}
+          onChange={(e) =>
+            field.onChange(
+              type === "number" ? Number(e.target.value) : e.target.value,
+            )
+          }
           value={field.value != undefined ? field.value : ""}
           type={type}
           label={label}
@@ -22,18 +25,18 @@ export const TextBox = ({ label, name, type, control }) => {
             height: "40.5px",
             backgroundColor: Theme.palette.background.header,
             borderRadius: "6px",
-            '& input[type=number]::-webkit-inner-spin-button': {
-              display: 'none',
-              WebkitAppearance: 'none',
+            "& input[type=number]::-webkit-inner-spin-button": {
+              display: "none",
+              WebkitAppearance: "none",
               margin: 0,
             },
-            '& input[type=number]::-webkit-outer-spin-button': {
-              display: 'none',
-              WebkitAppearance: 'none',
+            "& input[type=number]::-webkit-outer-spin-button": {
+              display: "none",
+              WebkitAppearance: "none",
               margin: 0,
             },
-            '& input[type=number]': {
-              MozAppearance: 'textfield',
+            "& input[type=number]": {
+              MozAppearance: "textfield",
             },
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
@@ -60,8 +63,6 @@ export const TextBox = ({ label, name, type, control }) => {
           }}
         />
       )}
-    >
-
-    </Controller>
+    ></Controller>
   );
 };

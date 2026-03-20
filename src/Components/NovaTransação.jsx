@@ -2,14 +2,12 @@ import { Button, Card, Dialog, Box } from "@mui/material";
 import { TextBox } from "./TextBox.jsx";
 import { Theme } from "../themes/theme.js";
 import { useNovaTransacao } from "../hooks/useNovaTransacao.js";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import { ButtonType } from "./ButtonType.jsx";
 import Alerta from "./Alerta.jsx";
 import { useHomeContext } from "../hooks/useHomeContext.js";
 
-
 export const NovaTransacao = () => {
-
   const {
     control,
     open,
@@ -21,14 +19,13 @@ export const NovaTransacao = () => {
     clickClose,
     clickOpen,
     handleSubmit,
-    cadastrar
+    cadastrar,
   } = useNovaTransacao();
-  
-  const { setGatilho} = useHomeContext();
+
+  const { setGatilho } = useHomeContext();
 
   return (
-    <Box
-    >
+    <Box>
       <Button
         onClick={clickOpen}
         variant="contained"
@@ -38,7 +35,7 @@ export const NovaTransacao = () => {
           color: Theme.palette.primary.contrastText,
           py: "7px",
           px: "10px",
-          fontSize: { xs: '10.5px', sm: "14px" },
+          fontSize: { xs: "10.5px", sm: "14px" },
           textTransform: "none",
           "&:hover": {
             backgroundColor: Theme.palette.primary.light,
@@ -75,12 +72,11 @@ export const NovaTransacao = () => {
             backgroundColor: Theme.palette.background.body,
           }}
         >
-
           <Box
             component={"form"}
             onSubmit={handleSubmit((data) => {
               cadastrar(data);
-              setGatilho(prev => !prev);
+              setGatilho((prev) => !prev);
             })}
             sx={{
               display: "flex",

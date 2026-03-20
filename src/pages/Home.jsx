@@ -7,22 +7,22 @@ import { InformacoesSaldo } from "../Components/InformacoesSaldo.jsx";
 import useHome from "../hooks/useHome.js";
 import { HomeProvider } from "../Context/HomeProvider.jsx";
 
-
 function Home() {
-
-  const {
-    lista
-  } = useHome();
-
+  const { lista } = useHome();
 
   if (!lista) {
-    return <Box
-      width={"100%"}
-      height={"100vh"}
-      display={"flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      color={Theme.palette.primary.contrastText}>Carregando...</Box>
+    return (
+      <Box
+        width={"100%"}
+        height={"100vh"}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        color={Theme.palette.primary.contrastText}
+      >
+        Carregando...
+      </Box>
+    );
   }
 
   return (
@@ -73,7 +73,6 @@ function Home() {
             width: { xs: "90%", md: "80%" },
             position: "relative",
             top: "100px",
-
           }}
         >
           <Box
@@ -82,13 +81,15 @@ function Home() {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Typography
-              color={Theme.palette.primary.contrastText}
-            >Transacoes</Typography>
+            <Typography color={Theme.palette.primary.contrastText}>
+              Transacoes
+            </Typography>
             <Typography
               variant="caption"
               color={Theme.palette.secundary.contrastText}
-            >{lista.paginacao.total} itens</Typography>
+            >
+              {lista.paginacao.total} itens
+            </Typography>
           </Box>
 
           <SearchBar />

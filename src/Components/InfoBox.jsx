@@ -4,9 +4,8 @@ import { ItemMap } from "./ItemMap.jsx";
 import { useHomeContext } from "../hooks/useHomeContext.js";
 
 export const InfoBox = () => {
+  const { changePage, page, search } = useHomeContext();
 
-  const {changePage, page , search } = useHomeContext();
-  
   return (
     <Box
       sx={{

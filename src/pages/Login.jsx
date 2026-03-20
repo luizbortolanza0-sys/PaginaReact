@@ -4,21 +4,20 @@ import { TextBox } from "../Components/TextBox";
 import { useLogin } from "../hooks/useLogin.js";
 import Alerta from "../Components/Alerta.jsx";
 
-
 export default function Login() {
-
-  const {form,
-        senha,
-        alerta,
-        mensagem,
-        tipoMensagem,
-        setAlert,
-        onClickCadastrar,
-        handleChange,
-        handleLogin} = useLogin();
+  const {
+    form,
+    senha,
+    alerta,
+    mensagem,
+    tipoMensagem,
+    setAlert,
+    onClickCadastrar,
+    handleChange,
+    handleLogin,
+  } = useLogin();
 
   return (
-    
     <Box
       sx={{
         display: "flex",
@@ -34,7 +33,7 @@ export default function Login() {
         sx={{
           display: "flex",
           backgroundColor: Theme.palette.primary.main,
-          height: {xs:"40%", md:"60%"},
+          height: { xs: "40%", md: "60%" },
           width: { xs: "90%", md: "35%" },
           justifyContent: "center",
           alignItems: "center",
@@ -79,14 +78,10 @@ export default function Login() {
                 display: "flex",
                 alignItems: "center",
                 height: "20px",
-                justifyContent: "space-between"
+                justifyContent: "space-between",
               }}
             >
-              
-              <Box 
-              display={"flex"}
-              alignItems={"center"}
-              >
+              <Box display={"flex"} alignItems={"center"}>
                 <Checkbox
                   onChange={handleChange}
                   size="small"
@@ -106,7 +101,7 @@ export default function Login() {
               </Box>
 
               <Typography
-                component={'a'}
+                component={"a"}
                 variant="caption"
                 href="/"
                 style={{

@@ -3,25 +3,27 @@ import useHome from "../hooks/useHome.js";
 
 export const HomeContext = createContext();
 
-
 export const HomeProvider = ({ children }) => {
+  const { page, search, lastData, lista, searchGet, setGatilho, changePage } =
+    useHome();
 
-    const {
+  if (!lista) {
+    return <></>;
+  }
+
+  return (
+    <HomeContext.Provider
+      value={{
+        setGatilho,
+        searchGet,
+        resumo: lista.resumo,
+        lastData,
         page,
         search,
-        lastData,
-        lista,
-        searchGet,
-        setGatilho,
-        changePage
-    } = useHome();
-
-    if (!lista) {
-        return <></>;
-    }
-
-    return <HomeContext.Provider value={
-        { setGatilho, searchGet,resumo: lista.resumo, lastData, page, search, changePage }}>
-        {children}
+        changePage,
+      }}
+    >
+      {children}
     </HomeContext.Provider>
-}
+  );
+};

@@ -3,13 +3,18 @@ import { InfoCard } from "./InfoCard";
 import { useHomeContext } from "../hooks/useHomeContext.js";
 
 export function ItemMap() {
-
   const { search, setGatilho } = useHomeContext();
-  
+
   if (search.transacoes == "") {
-    return (<p style={{
-      color: Theme.palette.primary.contrastText
-    }}>Nenhuma transação encontrada!</p>);
+    return (
+      <p
+        style={{
+          color: Theme.palette.primary.contrastText,
+        }}
+      >
+        Nenhuma transação encontrada!
+      </p>
+    );
   }
 
   return search.transacoes.map((item) => {

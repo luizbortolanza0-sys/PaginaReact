@@ -1,8 +1,8 @@
 import { Card, Box, Typography } from "@mui/material";
 import { Theme } from "../themes/theme.js";
 import Delete from "./Delete.jsx";
-import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 export const InfoCard = ({
   descricao,
@@ -27,37 +27,42 @@ export const InfoCard = ({
         color: Theme.palette.secundary.contrastText,
       }}
     >
-
-
       <Box
         sx={{
           display: "flex",
           flexDirection: {
-            xs: "column", md: "row"
+            xs: "column",
+            md: "row",
           },
           alignItems: "center",
           justifyContent: { xs: "center", md: "space-between" },
-          width: { xs: '85%', md: "95%" },
+          width: { xs: "85%", md: "95%" },
           height: "100%",
-          gap: "12px"
+          gap: "12px",
         }}
       >
         <Box
           display={"flex"}
           alignItems={"center"}
-          width={{xs:"100%", md:"50%"}}
+          width={{ xs: "100%", md: "50%" }}
         >
-
-          <Typography fontSize={"15px"} fontWeight={"bold"} color={{ xs: Theme.palette.primary.contrastText, md: Theme.palette.secundary.contrastText }}>
+          <Typography
+            fontSize={"15px"}
+            fontWeight={"bold"}
+            color={{
+              xs: Theme.palette.primary.contrastText,
+              md: Theme.palette.secundary.contrastText,
+            }}
+          >
             {descricao}
           </Typography>
         </Box>
         <Box
-          width={{xs:'100%', md:"75%"}}
+          width={{ xs: "100%", md: "75%" }}
           display={"flex"}
-          flexDirection={{ xs: 'column', md: "row" }}
+          flexDirection={{ xs: "column", md: "row" }}
           justifyContent={"space-between"}
-          alignItems={{xs:"flex-start",md:"center"}}
+          alignItems={{ xs: "flex-start", md: "center" }}
           gap={2}
         >
           <Typography
@@ -77,7 +82,7 @@ export const InfoCard = ({
             {tipo ? "R$ " + preco : "-R$ " + preco}
           </Typography>
           <Box
-            width={{xs:"100%", md:"60%"}}
+            width={{ xs: "100%", md: "60%" }}
             display={"flex"}
             flexDirection={"row"}
             alignItems={"center"}
@@ -95,10 +100,13 @@ export const InfoCard = ({
                 whiteSpace: "nowrap",
               }}
             >
-              <LabelOutlinedIcon sx={{
-                display: { xs: 'block', md: "none" },
-                height: "20px"
-              }} />{categoria}
+              <LabelOutlinedIcon
+                sx={{
+                  display: { xs: "block", md: "none" },
+                  height: "20px",
+                }}
+              />
+              {categoria}
             </Typography>
             <Typography
               sx={{
@@ -110,10 +118,13 @@ export const InfoCard = ({
                 whiteSpace: "nowrap",
               }}
             >
-              <CalendarTodayIcon sx={{
-                display: { xs: 'block', md: "none" },
-                height: "17px"
-              }} />{data}
+              <CalendarTodayIcon
+                sx={{
+                  display: { xs: "block", md: "none" },
+                  height: "17px",
+                }}
+              />
+              {data}
             </Typography>
             <Delete setGatilho={setGatilho} id={id} />
           </Box>
